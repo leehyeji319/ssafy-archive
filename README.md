@@ -1,2 +1,2 @@
 # FrontEnd-Study
-FrontEnd도 알고싶어요
+Front를 위한 기초부터하기
