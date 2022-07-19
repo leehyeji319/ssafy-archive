@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <table border="1"> <!--속성은 시작태그-->
+    <thead>
+      <tr>
+        <td>번호</td>
+        <td>이름</td>
+        <td>나이</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td rowspan="2">1-2</td>
+        <td>아이유</td>
+        <td>20</td>
+      </tr>
+      <tr>
+        <td>밥버거</td>
+        <td>30</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3">총 2명</td>
+      </tr>
+    </tfoot>
+  </table>
+
+<!--thead tr td*3 tbody tr td*3-->
+
+<!-- table>thead>tr>td*3^^tbody>tr>td*3-->
+<table>
+  <thead>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+<!--table>thead>tr>td*3^^tbody>(tr>td*3)*2-->
+<table>
+  <thead>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>
