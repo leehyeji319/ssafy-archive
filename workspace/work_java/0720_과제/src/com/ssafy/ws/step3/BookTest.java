@@ -11,6 +11,8 @@ public class BookTest {
 		
 		Book b2 = new Book("35355", "분석 설계", "소나무", "jaen.kr", 30000, "sw 모델링");
 		
+		//Book b2 = new Book("21425", "Java Pro2", "김하나", "jaen.kr", 25000, "Java dmdd");
+		
 		books[0] = b1;
 		books[1] = b2;
 		
