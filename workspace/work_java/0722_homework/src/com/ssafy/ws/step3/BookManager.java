@@ -55,15 +55,38 @@ public class BookManager {
 	    }
 	    return temp;
 	}
-//	
-//	public Magazine[] getMagazines() {
-//		
-//	}
-//
-//	public Book[] getBooks() {
-//		
-//	}
-//	
+	
+	public Magazine[] getMagazines() {	
+		int count = 0;
+		for (int i = 0; i <size; i++) {
+			if (books[i] instanceof Magazine) ++count;
+		}
+		Magazine [] result = new Magazine[count];
+		int idx = 0;
+		for (int i = 0; i <size; i++) {
+			if (books[i] instanceof Magazine) {
+				result[idx++] = (Magazine)books[i];
+			}
+		}
+		return result;
+	}
+
+	public Book[] getBooks() {
+		int count = 0;
+		for (int i = 0; i < size; i++) {
+			if (!(books[i] instanceof Magazine)) ++count;
+		}
+		
+		Book[] result = new Book[count];
+		int idx = 0;
+		for (int i = 0; i <size; i++) {
+			if (!(books[i] instanceof Magazine)) {
+				result[idx++] = books[i];
+			}
+		}
+		return result;
+	}
+	
 	public int getTotalPrice() {
 		int totalPrice = 0;
 		for (int i = 0; i < size; i++) {

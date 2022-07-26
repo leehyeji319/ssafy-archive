@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 
 public class PersonTest {
 
@@ -27,6 +29,13 @@ public class PersonTest {
 		 
 		p1.printInfo();
 		p2.printInfo();
+		
+		List<Person> persons = new ArrayList<>();
+		
+		
+		
+		System.out.println("사람 명수: " + persons.size());
+		
 	}
 
 }
