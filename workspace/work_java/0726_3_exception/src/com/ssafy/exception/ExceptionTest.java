@@ -3,7 +3,7 @@ package com.ssafy.exception;
 import java.io.IOException;
 
 public class ExceptionTest {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InvalidValueException {
 		
 		System.out.println(MyUtil.readLog());
 		
@@ -14,8 +14,13 @@ public class ExceptionTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(MyUtil.division(10, 2));
-		System.out.println(MyUtil.division(10, 0));
+		try {
+			System.out.println(MyUtil.division(10, 0));
+		} catch (InvalidValueException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(MyUtil.division(10, 3));
 		System.out.println("main end----------------");
 	}
 }

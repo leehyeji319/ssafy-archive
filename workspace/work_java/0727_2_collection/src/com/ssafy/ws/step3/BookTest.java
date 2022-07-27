@@ -4,7 +4,9 @@ public class BookTest {
 
 	public static void main(String[] args) {
 		
-		IBookManager bm = BookManagerImpl.getInstance();
+//		IBookManager bm = BookManagerImpl.getInstance();
+//		IBookManager bm = BookManagerImplList.getInstance();
+		IBookManager bm = BookManagerImplMap.getInstance();
 		
 		bm.add(new Book("21424", "Java Pro", "김하나", "jaen.kr", 15000, "Java 기본 문법"));
 		bm.add(new Book("21425", "Java Pro2", "김하나", "jaen.kr", 25000, "Java 응용"));

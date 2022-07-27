@@ -26,37 +26,38 @@ public class MyUtil {
 //		}
 //		
 //	}
-	
+
 	public static void logging(String msg) throws IOException {
 		PrintWriter out = null;
 		try {
 			out = new PrintWriter(new FileWriter("log.txt", true));
 			out.print(msg);
-		} 
-		
-		finally {
-			//stream이 열려 있을때만 close하겠다. 
-			if(out != null) out.close();
 		}
-		
+
+		finally {
+			// stream이 열려 있을때만 close하겠다.
+			if (out != null)
+				out.close();
+		}
+
 	}
-	
-	//읽어오는 코드
+
+	// 읽어오는 코드
 	public static String readLog() {
 		String log = null;
 		BufferedReader in = null;
 		try {
-			//이때 BufferedReader는 지역변수가 되버린다. .. 
-			//BufferedReader in = new BufferedReader(new FileReader("log.txt"));
-			in = new BufferedReader(new FileReader("log3.txt"));
+			// 이때 BufferedReader는 지역변수가 되버린다. ..
+			// BufferedReader in = new BufferedReader(new FileReader("log.txt"));
+			in = new BufferedReader(new FileReader("log.txt"));
 			log = in.readLine();
-		} 
+		}
 //		catch (FileNotFoundException e) {
 //			e.printStackTrace();
 //		} 
-		catch (IOException e) { //다형성 때문에 이거 하나로 다 처리할 수 있어서 FileNotFoundException을 생략할 수 있다.
+		catch (IOException e) { // 다형성 때문에 이거 하나로 다 처리할 수 있어서 FileNotFoundException을 생략할 수 있다.
 			e.printStackTrace();
-		} finally { //finally는 결국 항상 실행되는 코드이다...
+		} finally { // finally는 결국 항상 실행되는 코드이다...
 			System.out.println("finally...");
 			if (in != null)
 				try {
@@ -65,12 +66,15 @@ public class MyUtil {
 					e.printStackTrace();
 				}
 		}
-		
+
 		return log;
 	}
-	
-	//runtime exception
-	public static int division(int a, int b) {
+
+	// runtime exception
+	public static int division(int a, int b) throws InvalidValueException {
+		if (b == 0) {
+			throw new InvalidValueException(b);	 //선언부에도 선언. throw 코드 밑에는 진행되지 않는다.
+		}
 		int result = a / b;
 		return result;
 	}
