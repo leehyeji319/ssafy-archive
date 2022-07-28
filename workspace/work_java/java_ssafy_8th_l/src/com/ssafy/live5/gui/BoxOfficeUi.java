@@ -58,7 +58,7 @@ public class BoxOfficeUi extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // 기존 자료 삭제
-                model.setRowCount(0);
+                model.setRowCount(0); //table은 정보를 model에 따로 보관함
                 // 새로운 자료 조회
                 BoxOfficeDomParser parser = new BoxOfficeDomParser();
                 List<BoxOffice> list = parser.getBoxOffice();
@@ -71,6 +71,15 @@ public class BoxOfficeUi extends JFrame {
         });
 
         // TODO:테이블에서 발생하는 click event 처리를 위한 listener 등록
+        table.addMouseListener(new MouseAdapter() { //마우스어댑터
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		int row = table.getSelectedRow(); //선택된 행을 알려줄수잇어 ?? 
+        		//스윙은 테이블을 모델에 저장을 해서 모델한테 물어봐야함
+        		String name = model.getValueAt(row, 1).toString(); //object로 반환해줘서 toString
+        		JOptionPane.showMessageDialog(BoxOfficeUi.this, "선택적 영화 정보: " + name);
+        	}
+		});
         // END:
     }
 

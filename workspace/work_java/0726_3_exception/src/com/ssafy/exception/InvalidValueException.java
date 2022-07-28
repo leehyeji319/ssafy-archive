@@ -1,6 +1,6 @@
 package com.ssafy.exception;
 
-public class InvalidValueException extends Exception {
+public class InvalidValueException extends RuntimeException {
 	private int value;
 
 	public InvalidValueException(int value) {
@@ -11,6 +11,5 @@ public class InvalidValueException extends Exception {
 	public int getValue() {
 		return value;
 	}
-	
 	
 }
