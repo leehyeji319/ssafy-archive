@@ -26,7 +26,7 @@ public class Solution_한빈이의SpotMart {
 			int end = arr.length - 1;
 			int cur = 0;
 			int answer = 0;
-			//이분탐색
+			//투포인터
 			while(start!=end) {
 				int sum = arr[start] + arr[end];
 				if (sum > M) {
