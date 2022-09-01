@@ -16,6 +16,7 @@ ul, li {
 
 body {
   font: Lucida Grande, Trebuchet MS;
+  font-size: 16px;
 }
 
 /* HEADER */
@@ -28,9 +29,11 @@ header {
 header h1 {
   width: 80%;
   margin: 0 auto;
+  margin-top: 25px;
 }
 header h1 #home {
   color: rgb(173, 116, 230);
+  font-size: 2rem;
 }
 header nav {
   width: 80%;
