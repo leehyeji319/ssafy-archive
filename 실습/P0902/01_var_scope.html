@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      var myVar = "전역변수"; //윈도우 객체에 등록
+
+      function myFunc() {
+        var myVar = "지역변수";
+        global = "나는??"; //얘는 왜 접근이 가능할까? myVar처럼 전역이라서
+        //global처럼 선언하지 않고 사용하는 변수는 전역변수로 할당이 된다. -> 안좋음!!
+        var test = 1; //myFunc의 지역변수 -> 밖에서 접근 못해
+        //var로 선언한애는 함수안에서 쓰게 되는 지역변수가 된다. 단점: 중복해서 선언이 가능하다.
+        //js는 동적 타이핑 언어이기 때문에 변수가 지니는
+        //타입정의는 선언할 때가 아니라 어떤애가 들어오는지에 따라 타입이 결정된다.
+        test = "a";
+        var test = true; //중복 선언 오류 없음!
+        //불필요하게 변수를 드러내지 않도록 스콥관리를 할 필요가 있다. 중복선언해도 오류가 나지 않는 애를 보완하기 위해
+        //let이라는 키워드를 통해 선언을햇고, 중복선언도 오류가 나고, 자신이 지닌 블록레벨의 스콥을 지니게됐다.
+        {
+          var count = 10;
+        }
+        console.log(myVar, global, count);
+      }
+
+      myFunc();
+      console.log(myVar, global);
+    </script>
+  </head>
+  <body></body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      //이거 단점 : 상태를 가지고있는 애가 아닌데 다 어쩌구하는거임!!
+
+      //내가 객체를 선언하면 이 객체의 모든 공통처럼 생성자 함수를 만들어볼거예요
+      //자바는 생성자를 만드는데 정해진게 잇지만 자스는 그냥 모든 함수가생성자 함수가 될 수 있다.
+      //자스는 동적 속성 추가가된다. -> 언제든지 할당하면 동적으로 속성이 막 늘어남
+      function Person(name, age) {
+        console.log(this);
+        this.name = name;
+        this.age = age;
+        this.increaseAge = function () {
+          this.age++;
+        };
+      }
+
+      let p1 = new Person("김재환", 27);
+      //객체하나 더 만들게요
+      let p2 = new Person("이동욱", 16);
+      console.log(p1.name, p1.age);
+      console.log(p2.name, p2.age);
+      p1.increaseAge();
+      console.log(p1.name, p1.age);
+      console.log(p2.name, p2.age); //개별적이라는 건? 별도의 객체라는걸 증명하는거지
+      //   Person(); //이렇게 하면 또 언디파가 나오지
+    </script>
+  </head>
+  <body></body>
+</html>

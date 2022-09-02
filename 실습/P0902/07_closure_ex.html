@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      //let count = 0; // 이상황은  .counter 함수 뿐만 아니라 모든 함수가 가능한 문제점이 발생 : 은닉이 불가
+
+      //   function counter() {
+      //     return ++count; //얘를 누적시키고싶으니까 전역에 count를 선언했는데
+      //     //밑에서 모르는 함수가 내 카운트를 써버릴수있자나 ㅠ
+      //     //은닉이안됨..!
+      //   }
+      //   //   function xxx() {
+      //   //     count++;
+      //   //   }
+
+      //   console.log(counter());
+      //   console.log(counter());
+      //   console.log(counter());
+
+      function counter() {
+        let count = 0; //이렇게 설계하면 은닉이 생김
+        return function () {
+          return ++count;
+        };
+      }
+
+      let myCounter = counter(); //함수가 여기 저장되어있자나
+      console.log(myCounter());
+      console.log(myCounter());
+      console.log(myCounter());
+    </script>
+  </head>
+  <body></body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      function sayHello() {
+        console.log(this); //전역적으로 만든함수는 this하면 자동으로 윈도우가 연결 -> 오류가 나야하는데 왜 안나지? 윈도우에 name 속성이있거든ㅋ
+        console.log("Hello " + this.name);
+      }
+
+      let person = {
+        name: "김재환",
+        greeting: sayHello, //얘는 함수를 가지욌는 변수지
+      };
+
+      let person2 = {
+        name: "김재환",
+        greeting: sayHello, //얘는 함수를 가지욌는 변수지
+      };
+
+      sayHello();
+      person.greeting(); //이렇게 부르는건 객체 메서드로 부르는거지
+      person2.greeting();
+      //어떻게 어디서 부르느냐에 따라 this가 결정된다.
+
+      new sayHello(); //생성자 함수로 써서 객체를 만들고 속성을 써서 초기화목적으로 쓰겟다는 소리임 이건
+
+      sayHello.call({ name: "aa" }); //우리가 준 녀석이 this로 결정됐다
+      //arrow function엔 this가 없으 하지만 쓸순잇어
+      //애로우 펑션안에서의 디스는 렉시컬 스코프의 (상위스코프)의 디스를 따른다/
+      //   console.log(this.name);
+      //일반 전역함수는 this를 쓰면 다 언디파인드임
+    </script>
+  </head>
+  <body></body>
+</html>
