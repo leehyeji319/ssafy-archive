@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script>
+      let rootSrc = "./img_03/";
+      let bulbons = [
+        "pic_bulboff.gif",
+        "pic_bulbon_blue.gif",
+        "pic_bulbon_green.gif",
+        "pic_bulbon_red.gif",
+        "pic_bulbon_yellow.gif",
+        "pic_bulbon.gif",
+      ];
+      function lightFact() {
+        let idx = 0;
+        return function () {
+          idx = (idx + 1) % 6;
+          return bulbons[idx];
+        };
+      }
+
+      let getLight = lightFact();
+
+      let l;
+      window.onload = () => {
+        l = document.getElementById("light");
+      };
+
+      function light() {
+        l.src = rootSrc + getLight();
+      }
+    </script>
+  </head>
+  <body>
+    <img src="./img_03/pic_bulboff.gif" id="light" alt="" onclick="light()" />
+  </body>
+</html>

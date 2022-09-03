@@ -5,25 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-  </head>
-  <body>
-    <!--
-        html 요소 이벤트 처리
-        1) html 요소의 onXXX속성으로 핸들러 지정
-        //이벤트소스는? -> 이벤트가 일어난 발생지
-        2) js코드에서 dom tree에서 html요소 객체를 찾고 onxxx속성으로 이벤트 핸들러 지정
-        3) js코드에서 dom tree에서 html요소 객체를 찾고 addEventListner 이벤트 핸들러 지정 
-
-        c
-    -->
-    <!-- 나는함수를 준게 아니라 익명함수안에 실행 코드를 준거임 ~! -->
-    <!-- <img src="./img/pic_bulboff.gif" alt="" onclick="console.log('b');alert('a');" /> -->
-    <!-- 위에서 이벤트 처리함수를 가지고있어그럴때는 온클릭에 모라고써야함? -->
-    <!-- img.onclick = function() {
-        changeImage(this);  //이 객체
-    } -->
-    <img src="./img/pic_bulboff.gif" alt="" onclick="changeImage(this)" />
-    <img src="./img/pic_bulboff.gif" id="light" />
     <script>
       //얘는 this가 안됨 왜? 얘는 함수자체가 이벤트 핸들러로 등록된 게 아니잖아 ..
       //이미 등록된 이벤트 핸들러가 얘를 부르는 것 뿐. 그래서 여기서 this쓰면 window가 나와버림
@@ -50,7 +31,40 @@
         }
       }
 
-      document.getElementById("light").onclick = changeImage2; //괄호하며 안됨
+      //   // 이렇게 위에 있어서 안되면 document가 다 만들어지고 부르면 되잖아?
+      //   window.onload = function () {
+      //     //여러개의 이벤트핸들러를 적용할 수 없다.
+      //     document.getElementById("light").onclick = changeImage2; //괄호하며 안됨
+      //     documnet.getElementById("light").onclick = function () {
+      //       alert("hahaha");
+      //     };
+      //   };
+      window.onload = function () {
+        //여러개의 이벤트핸들러를 적용할 수 없다.
+        document.getElementById("light").addEventLisnter("click", changeImage2);
+        document.getElementById("light").addEventLisnter("click", function () {
+          alert("hahah");
+        });
+      };
     </script>
+  </head>
+  <body>
+    <!--
+        html 요소 이벤트 처리
+        1) html 요소의 onXXX속성으로 핸들러 지정
+        //이벤트소스는? -> 이벤트가 일어난 발생지
+        2) js코드에서 dom tree에서 html요소 객체를 찾고 onxxx속성으로 이벤트 핸들러 지정
+        3) js코드에서 dom tree에서 html요소 객체를 찾고 addEventListner 이벤트 핸들러 지정 
+
+        c
+    -->
+    <!-- 나는함수를 준게 아니라 익명함수안에 실행 코드를 준거임 ~! -->
+    <!-- <img src="./img/pic_bulboff.gif" alt="" onclick="console.log('b');alert('a');" /> -->
+    <!-- 위에서 이벤트 처리함수를 가지고있어그럴때는 온클릭에 모라고써야함? -->
+    <!-- img.onclick = function() {
+        changeImage(this);  //이 객체
+    } -->
+    <img src="./img/pic_bulboff.gif" alt="" onclick="changeImage(this)" />
+    <img src="./img/pic_bulboff.gif" id="light" />
   </body>
 </html>
