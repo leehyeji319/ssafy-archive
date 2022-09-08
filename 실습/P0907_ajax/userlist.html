@@ -28,12 +28,35 @@
           for (const user of userList) {
             let tr = document.createElement("tr");
             let content = "";
+            tr.setAttribute("data-userid", user.id);
+            tr.addEventListener("click", getPosts);
             content = `<td>${user.id}</td>`;
             content += `<td>${user.name}</td>`;
             content += `<td>${user.phone}</td>`;
             content += `<td>${user.website}</td>`;
             tr.innerHTML = content;
             userListBody.appendChild(tr);
+          }
+        }
+        function getPosts() {
+          let userId = this.getAttribute("data-userid"); //이벤트핸들러에서 소스는 이벤트핸들러 자기 자신이잖아요
+          fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`)
+            .then((response) => response.json()) //arrow function은 내 상위 스코프를 this를 가져다 쓰고싶을때만 쓰는것임
+            .then((json) => displayPostList(json))
+            .catch((error) => console.log(error));
+        }
+        function displayPostList(posts) {
+          let postListBody = document.querySelector("#postList");
+
+          postListBody.innerHTML = "";
+          for (const post of posts) {
+            //하나씩 꺼내서 tr, td만들어야함
+            let tr = document.createElement("tr");
+            let content = `<td>${post.userId}</td>`;
+            content += `<td>${post.title}</td>`;
+            content += `<td>${post.body}</td>`;
+            tr.innerHTML = content;
+            postListBody.appendChild(tr);
           }
         }
         document.querySelector("#listBtn").addEventListener("click", getUserList);
@@ -60,6 +83,18 @@
               <td class="text-center" colspan="4">사용자 정보를 조회해주세요</td>
             </tr>
           </tbody>
+        </table>
+      </div>
+      <div class="row">
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="col-md-2">작성자아이디</th>
+              <th class="col-md-4">제목</th>
+              <th class="col-md-6">내용</th>
+            </tr>
+          </thead>
+          <tbody id="postList"></tbody>
         </table>
       </div>
     </div>
