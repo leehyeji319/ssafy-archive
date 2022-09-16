@@ -18,4 +18,16 @@ public class DeptService {
 		//부서리스트 조회
 		return deptDao.selectDepts();
 	}
+	
+	public Dept getDept(int deptno) {
+		return deptDao.selectDept(deptno);
+	}
+	
+	public boolean delete(int deptno) {
+		return deptDao.deleteDept(deptno);
+	}
+	
+	public boolean updateDept(Dept dept) {
+		return deptDao.updateDept(dept);
+	}
 }

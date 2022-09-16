@@ -127,46 +127,60 @@ public class DeptDAO {
 	
 	
 	//부서번호에 해당하는 부서 가져오기
-		public Dept selectDept(int deptNo) {
-			Connection conn = null;
-			PreparedStatement pstmt = null;
-			String sql = "select * from dept where deptno = ?";
-			
-			try {
-				// step2
-				conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-							
-				// step3
-				pstmt = conn.prepareStatement(sql);
-				
-				//step4
-				pstmt.setInt(1, deptNo);
-				Dept dept = (Dept) pstmt.executeQuery();
-				
-				return dept;
-							
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				if(pstmt != null) {
-					try {
-						pstmt.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
-				if(conn != null) {
-					try {
-						conn.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-			
-			return null;
-		}
-		
+	public Dept selectDept(int deptno) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Dept dept = null;
+
+        String sql = "select deptno,dname,loc from dept where deptno = ?";
+        try {
+            // step2
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+
+            // step3
+            pstmt = conn.prepareStatement(sql);
+
+            // step4
+            pstmt.setInt(1, deptno);
+            rs = pstmt.executeQuery();
+
+            // step5
+
+            if (rs.next()) {
+                dept = new Dept(rs.getInt(1), rs.getString(2), rs.getString(3));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            if(rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return dept;
+
+
+    }		
 		//부서번호 주면 삭제하기
 		public boolean deleteDept(int deptNo) {
 			Connection conn = null;
@@ -205,6 +219,48 @@ public class DeptDAO {
 					}
 				}
 			}
+			return false;
+		}
+		
+		public boolean updateDept(Dept dept) {
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			String sql = "update dept set dname = ? ,loc = ? where deptno = ?";
+			try {
+				// step2
+				conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+				
+				// step3
+				pstmt = conn.prepareStatement(sql);
+				
+				// step4
+				pstmt.setString(1, dept.getDname());
+				pstmt.setString(2, dept.getLoc());
+				pstmt.setInt(3, dept.getDeptNo());
+				int rowCnt = pstmt.executeUpdate();
+				
+				return true;
+				
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				if(pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if(conn != null) {
+					try {
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			
 			return false;
 		}
 		

@@ -10,7 +10,7 @@
 
 	<ul>
 		<li> <a href="./dept/register_form.jsp">부서 등록</a> </li>
-		<li> 부서 목록 </li>
+		<li> <a href="./dept/list.do">부서 목록 </a></li>
 	</ul>
 </body>
 </html>

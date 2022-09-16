@@ -3,6 +3,7 @@ package com.ssafy.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,16 +35,16 @@ public class ResigerDeptServlet extends HttpServlet {
 		
 		//4. view page by result
 		//먼저 응답을 해야하니까 응답객체 셋팅을 먼저합시다.
-		response.setContentType("text/html; charset=utf-8");
-		PrintWriter out = response.getWriter();
 		if (res) {
-			out.println("<htnl><body>");
-			out.println("<h2>등록 성공 </h2>");
-			out.println("</body></html>");
+//			response.sendRedirect("./list.do"); //redirect는 무조건 get방식 
+			request.getRequestDispatcher("./list.do").forward(request, response); //포워드로 하면 들어온 request의 방식으로 되는거죠
+			return;
 		} else {
-			out.println("<htnl><body>");
-			out.println("<h2>등록 실패 </h2>");
-			out.println("</body></html>");
+			request.setAttribute("errorMsg", "등록에 실패하였습니다.");
+			RequestDispatcher rd = request.getRequestDispatcher("./register_form.jsp");
+			rd.forward(request, response);
+			return;
+			
 		}
 	}
 
