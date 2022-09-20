@@ -22,14 +22,22 @@ public class DeptDetailServlet extends HttpServlet {
 		int deptno = Integer.parseInt(request.getParameter("deptno"));
 		
 		// 2. call Service
-		Dept dept = deptService.getDept(deptno);
-		
-		// 3. view에게 넘겨주기 (직접 줄 수 없으니 어딘가에 저장하고 share하도록 해야함)
-		// 내장 객체(session, context 등..) 어디에 저장할지는 이 데이터의 성격에 의해 정해진다. 
-		request.setAttribute("dept", dept);
-		//request를 넘겨줄땐 무족권 forward!!
-		request.getRequestDispatcher("./detail_form.jsp").forward(request, response);
-		return;
+		try {
+			Dept dept = deptService.getDept(deptno);
+			
+			// 3. view에게 넘겨주기 (직접 줄 수 없으니 어딘가에 저장하고 share하도록 해야함)
+			// 내장 객체(session, context 등..) 어디에 저장할지는 이 데이터의 성격에 의해 정해진다. 
+			request.setAttribute("dept", dept);
+			//request를 넘겨줄땐 무족권 forward!!
+			request.getRequestDispatcher("./detail_form.jsp").forward(request, response);
+			return;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			request.setAttribute("errorMsg", e.getMessage());
+			request.getRequestDispatcher("../error.jsp").forward(request, response);
+			return;
+		}
 		
 	}
 

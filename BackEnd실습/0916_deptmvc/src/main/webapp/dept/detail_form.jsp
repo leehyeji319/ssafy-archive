@@ -36,7 +36,7 @@
 					<tr>
 						<td colspan="2">
 							<input type="submit" value="수정"/>
-							<input type="submit" value="삭제" formaction="./delete.do" formmethod="post"/>							
+							<input type="submit" value="삭제" formaction="./remove.do" formmethod="post"/>							
 							<input type="reset" value="취소"/>
 						</td>
 					</tr>

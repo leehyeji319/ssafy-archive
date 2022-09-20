@@ -1,6 +1,6 @@
-<%@page import="com.ssafy.model.dto.Dept"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*,java.text.*"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,9 +10,6 @@
 <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </head>
 <body>
-<%
-	List<Dept> deptList = (List<Dept>)request.getAttribute("deptList");
-%>
 	<div class="container">
 		 <div class="row mt-3">
 		            <h2 class="bg-primary text-light text-center">부서 목록</h2>
@@ -21,33 +18,34 @@
 			<table class="table table-striped table-hover">
 				<thead>
 					<tr>
-						<td>부서번호</td>
-						<td>부서이름</td>
-						<td>부서지역</td>
+						<th>번호</th>
+						<th>부서번호</th>
+						<th>부서이름</th>
+						<th>부서지역</th>
 					</tr>
 				</thead>
 				<tbody>
-<%
-	if (deptList == null || deptList.size() == 0) {		%>
-			<tr>
-				<td colspan="3">등록된 부서정보가 없습니다.</td>
-			</tr>
-<%	} else {
-		/* 반복문으로 뿌려주기 */
-		for (Dept dept : deptList) {
-%>
-					<tr>
-						<th><%=dept.getDeptNo() %></th>
-						<th><a href="./detail.do?deptno=<%=dept.getDeptNo() %>"><%=dept.getDname() %></a></th>
-						<th><%=dept.getLoc() %></th>
-					</tr>
-<% 		} 
-	}%>
+				
+				<c:choose>
+					<c:when test="${empty deptList}">
+						<tr> <td colspan="4">등록된 부서정보가 없습니다.</td></tr>
+					</c:when> 
+					<c:otherwise>
+						<c:forEach items="${requestScope.deptList}" 
+							var="dept" varStatus="status">
+									<tr>
+										<td>${status.count}</td>
+										<td>${dept.deptNo}</td>
+										<td><a href="./detail.do?deptno=${dept.deptNo}">${dept.dname}</a></td>
+										<td>${dept.loc}</td>
+									</tr>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+				
 				</tbody>
 			</table>
-		
 		</div>
-		
 	</div>
 </body>
 </html>

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.ssafy.model.service.DeptService;
 
 
-@WebServlet("/dept/delete.do")
+@WebServlet("/dept/remove.do")
 public class DeptDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -24,15 +24,20 @@ public class DeptDeleteServlet extends HttpServlet {
 		int deptno = Integer.parseInt(request.getParameter("deptno"));
 		
 		// 2.call service
-		boolean res = deptService.delete(deptno);
-		
-		if (res) {
+		try {
+			boolean res = deptService.delete(deptno);
+			
+			if (res) {
+				request.setAttribute("msg", "부서 삭제에 성공하였습니다.");
+			} else {
+				request.setAttribute("msg", "부서 삭제에 실패하였습니다.");
+			}
 			request.getRequestDispatcher("./list.do").forward(request, response);
 			return;
-		} else {
-			request.setAttribute("errorMsg", "해당하는 부서번호가 없습니다.");
-			RequestDispatcher rd = request.getRequestDispatcher("./list.do");
-			rd.forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("errorMsg", e.getMessage());
+			request.getRequestDispatcher("../error.jsp").forward(request, response);
 			return;
 		}
 		

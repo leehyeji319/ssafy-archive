@@ -15,6 +15,7 @@
 		<div class="row mt-3">
 			<h2 class="bg-primary text-light text-center">부서 등록</h2>
 		</div>
+		
 		<c:if test="${errorMsg != null} ">
 			<div class="row mt-3">
 				<h4 class="bg-warning text-light text-center">${errorMsg}</h4>

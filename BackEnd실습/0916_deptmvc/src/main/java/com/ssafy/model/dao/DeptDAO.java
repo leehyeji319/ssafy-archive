@@ -8,27 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ssafy.model.dto.Dept;
+import com.ssafy.util.DBUtil;
 
 //Model: DAO(Data Access Login)
 public class DeptDAO {
 
-	static final String DRIVER_CLASSNAME = "com.mysql.cj.jdbc.Driver";
 	static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/scott?serverTimezone=UTC";
 	static final String DB_USER = "root";
 	static final String DB_PASS = "1234qwer";
 	
-	static {
-		
-		try {
-			// step1
-			Class.forName(DRIVER_CLASSNAME);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
+
 	
 	
-	public int insertDept(Dept dept) {
+	public int insertDept(Dept dept) throws SQLException {
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -48,31 +40,15 @@ public class DeptDAO {
 			System.out.println(rowCnt+" 행이 처리되었습니다.");
 			
 			return rowCnt;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			if(pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if(conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+		} finally {
+			
+			DBUtil.close(pstmt);
 		}
-		
-		return 0;
 		
 	}
 	
 
-	public List<Dept> selectDepts() {
+	public List<Dept> selectDepts() throws SQLException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -95,30 +71,9 @@ public class DeptDAO {
 				list.add(new Dept(rs.getInt(1), rs.getString(2), rs.getString(3)));
 			}
 			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			if(rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if(pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if(conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+		} finally {
+			DBUtil.close(rs, pstmt, conn);
+			
 		}
 		return list;
 		
@@ -127,7 +82,7 @@ public class DeptDAO {
 	
 	
 	//부서번호에 해당하는 부서 가져오기
-	public Dept selectDept(int deptno) {
+	public Dept selectDept(int deptno) throws SQLException {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -145,36 +100,13 @@ public class DeptDAO {
             pstmt.setInt(1, deptno);
             rs = pstmt.executeQuery();
 
-            // step5
-
             if (rs.next()) {
-                dept = new Dept(rs.getInt(1), rs.getString(2), rs.getString(3));
+            	dept = new Dept(rs.getInt(1), rs.getString(2), rs.getString(3));
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }finally {
-            if(rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if(pstmt != null) {
-                try {
-                    pstmt.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if(conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            // step5
+        } finally {
+        	DBUtil.close(rs, pstmt, conn);
+            
         }
 
         return dept;
@@ -182,7 +114,7 @@ public class DeptDAO {
 
     }		
 		//부서번호 주면 삭제하기
-		public boolean deleteDept(int deptNo) {
+		public int deleteDept(int deptNo) throws SQLException{
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			String sql = "delete from dept where deptno = ?";
@@ -196,33 +128,17 @@ public class DeptDAO {
 				
 				//step4
 				pstmt.setInt(1, deptNo);
-				pstmt.executeUpdate();
+				int rowCnt = pstmt.executeUpdate();
 				System.out.println(deptNo + " 삭제하였습니다.");
 				
-				return true;
+				return rowCnt;
 							
-			} catch (SQLException e) {
-				e.printStackTrace();
 			} finally {
-				if(pstmt != null) {
-					try {
-						pstmt.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
-				if(conn != null) {
-					try {
-						conn.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
+				DBUtil.close(pstmt, conn);
 			}
-			return false;
 		}
 		
-		public boolean updateDept(Dept dept) {
+		public int updateDept(Dept dept) throws SQLException{
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			String sql = "update dept set dname = ? ,loc = ? where deptno = ?";
@@ -238,30 +154,14 @@ public class DeptDAO {
 				pstmt.setString(2, dept.getLoc());
 				pstmt.setInt(3, dept.getDeptNo());
 				int rowCnt = pstmt.executeUpdate();
+				System.out.println(rowCnt + "행이 처리되었습니다.");
+				return rowCnt;
 				
-				return true;
 				
+			} finally {
+				DBUtil.close(pstmt, conn);
 				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}finally {
-				if(pstmt != null) {
-					try {
-						pstmt.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
-				if(conn != null) {
-					try {
-						conn.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
 			}
-			
-			return false;
 		}
 		
 }
