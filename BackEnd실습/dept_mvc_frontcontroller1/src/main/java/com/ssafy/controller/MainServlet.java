@@ -69,6 +69,8 @@ public class MainServlet extends HttpServlet {
 				pageInfo = registerDept(request, response);
 			} else if (url.equals("/user/login.do")) {
 				pageInfo = login(request, response);
+			} else if (url.equals("/user/logout.do")) {
+				pageInfo = logout(request, response);
 			}
 
 			if (pageInfo.isForward()) {
@@ -183,6 +185,22 @@ public class MainServlet extends HttpServlet {
 		
 	}
 	
+	
+	protected PageInfo logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		Cookie cookies[] = request.getCookies();
+		if (cookies != null && cookies.length > 0) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals("userId") || cookie.getName().equals("userName")) {
+					cookie.setPath(request.getContextPath()); //꺼낸쿠키라서 괜찮을 줄 알았는데 패쓰 설정 다시 해줘야하네 ... 
+					cookie.setMaxAge(0); //0으로 설정하면 쿠키삭제
+					response.addCookie(cookie);
+				}
+			}
+		}
+		
+		return new PageInfo(false, "/index.jsp"); //forwarding안하고~
+	}
 	
 
 }

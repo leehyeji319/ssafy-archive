@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%@ include file="/menu.jsp" %>
+	<%-- <%@ include file="/menu.jsp" %> --%>
 	<jsp:include page="/menu.jsp"/>
 	
 	

@@ -10,6 +10,7 @@
 <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </head>
 <body>
+	<jsp:include page="/menu.jsp"/>
 <!-- 스크립트에서 jstl쓰는거 아님. 스크립트안은 out.print임 스크립트 코드는 브라우저에서 실행되자나.. 
 스크립트에 el을 넣은게 아니라 스크립트도 출력인거임 동작하면서 출력을 만들어내는것이 -->
 <script>
