@@ -84,7 +84,7 @@ public class MainServlet extends HttpServlet {
 				pageInfo = login(request, response);
 			} else if (url.equals("/user/logout.do")) {
 				pageInfo = logout(request, response);
-			} else if (url.equals("/dept/register_form.do")) {
+			}else if (url.equals("/dept/register_form.do")) {
 				pageInfo = registerForm(request, response);
 				
 			} else if (url.equals("/user/login_form.do")) {
@@ -185,14 +185,18 @@ public class MainServlet extends HttpServlet {
 		
 		if (name != null) {
 			//login 흔적 남기기
-			Cookie idCookie = new Cookie("userId", userId);
-			Cookie nameCookie = new Cookie("userName", URLEncoder.encode(name, "utf-8")); //인코딩해서 보내주기
+//			Cookie idCookie = new Cookie("userId", userId);
+//			Cookie nameCookie = new Cookie("userName", URLEncoder.encode(name, "utf-8")); //인코딩해서 보내주기
+//			
+//			idCookie.setPath(request.getContextPath());
+//			nameCookie.setPath(request.getContextPath());
+//			
+//			response.addCookie(idCookie);
+//			response.addCookie(nameCookie);
+			HttpSession session = request.getSession();
+			session.setAttribute("userId", userId);
+			session.setAttribute("userName", name);
 			
-			idCookie.setPath(request.getContextPath());
-			nameCookie.setPath(request.getContextPath());
-			
-			response.addCookie(idCookie);
-			response.addCookie(nameCookie);
 			
 			return new PageInfo(false, "/dept/list.do"); //false가 포워딩을 안하겠다는거잖아요? 리퀘스트를 유지할 필요가없어. 
 			//리퀘스트를 할때는 ? 유지하거나 토스하고싶을때만 ... 포워딩 단점 : 주소창과 이동화면이 일치하지않는다.
@@ -208,16 +212,18 @@ public class MainServlet extends HttpServlet {
 	
 	protected PageInfo logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		Cookie cookies[] = request.getCookies();
-		if (cookies != null && cookies.length > 0) {
-			for (Cookie cookie : cookies) {
-				if (cookie.getName().equals("userId") || cookie.getName().equals("userName")) {
-					cookie.setPath(request.getContextPath()); //꺼낸쿠키라서 괜찮을 줄 알았는데 패쓰 설정 다시 해줘야하네 ... 
-					cookie.setMaxAge(0); //0으로 설정하면 쿠키삭제
-					response.addCookie(cookie);
-				}
-			}
-		}
+//		Cookie cookies[] = request.getCookies();
+//		if (cookies != null && cookies.length > 0) {
+//			for (Cookie cookie : cookies) {
+//				if (cookie.getName().equals("userId") || cookie.getName().equals("userName")) {
+//					cookie.setPath(request.getContextPath()); //꺼낸쿠키라서 괜찮을 줄 알았는데 패쓰 설정 다시 해줘야하네 ... 
+//					cookie.setMaxAge(0); //0으로 설정하면 쿠키삭제
+//					response.addCookie(cookie);
+//				}
+//			}
+//		}
+		HttpSession session = request.getSession();
+		session.invalidate(); //logout하면 invalidate로 아예 싹 날려버리기~
 		
 		return new PageInfo(false, "/index.jsp"); //forwarding안하고~
 	}
