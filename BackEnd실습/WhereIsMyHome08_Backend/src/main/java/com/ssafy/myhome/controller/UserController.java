@@ -40,9 +40,9 @@ public class UserController implements Controller {
 	
 	protected PageInfoDto register(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String userId = request.getParameter("userid");
-		String userPwd = request.getParameter("usrepwd");
+		String userPwd = request.getParameter("userpwd");
 		String userName = request.getParameter("username");
-		String address = request.getParameter("email");
+		String address = request.getParameter("address");
 		String phone = request.getParameter("phone");
 		
 		UserDto userDto = new UserDto();

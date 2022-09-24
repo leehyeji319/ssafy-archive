@@ -1,6 +1,7 @@
 package com.ssafy.myhome.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ssafy.myhome.model.dto.DataInfoDto;
 import com.ssafy.myhome.model.dto.PageInfoDto;
 
 
@@ -20,6 +23,7 @@ public class FrontController extends HttpServlet {
 	private UserController userController = new UserController();
 	private HouseController houseController = new HouseController();
 	private HomeController homeController = new HomeController();
+	private NoticeController noticeController = new NoticeController();
 	
 	private String root;
 	
@@ -64,8 +68,7 @@ public class FrontController extends HttpServlet {
 			}
 		} 
 		
-Object result = null;
-		
+		Object result = null;
 		try {
 			//분기 처리
 			Controller controller = null;
@@ -73,9 +76,10 @@ Object result = null;
 				controller = houseController;
 			} else if (url.startsWith("/user")) {
 				controller = userController;
+			} else if (url.startsWith("/notice")){
+				controller = noticeController;
 			} else {
-				// TODO homeController
-				
+				controller = homeController;
 			}
 			
 			if (controller != null) {
@@ -92,6 +96,15 @@ Object result = null;
 					response.sendRedirect(root + pageInfo.getPage());
 				}
 				
+			} else if(result instanceof DataInfoDto) { //DataInfo 처리
+				DataInfoDto dataInfo = (DataInfoDto) result;
+				response.setContentType(dataInfo.getContentType()+";charset=utf-8");
+				if (dataInfo.getContentType().equals("application/json")) {
+					ObjectMapper mapper = new ObjectMapper();
+					String value = mapper.writeValueAsString(dataInfo.getData());
+
+					response.getWriter().print(value);
+				}
 			}
 			
 		} catch (Exception e) {

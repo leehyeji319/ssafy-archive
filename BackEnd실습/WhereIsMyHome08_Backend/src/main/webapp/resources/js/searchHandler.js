@@ -1,13 +1,46 @@
 // 조회 요청 메소드
 function getHouseList() {
-	let guguncode = document.querySelector("#gugun").value;
-	let sidocode = document.querySelector("#sido").value;
-	let dongcode = document.querySelector("#dong").value;	
-	let url = "/WhereIsMyHome08_Backend/house/list.do?sidocode="+sidocode+"&guguncode="+guguncode+"&dongcode="+dongcode;
-
-  	location.href = url;
+	let dongcode = document.querySelector("#dong").value;
+	
+	if (dongcode != '') {
+		let url = "/WhereIsMyHome08_Backend/house/list.do?dongcode="+dongcode;
+  		location.href = url;
+	} else {
+		alert('동선택을 해주세요.');
+	}
 }
 
+function getHouseDeals(url, latlng, aptName, kakaoMap) {
+			  fetch(url)
+			    .then((response) => response.json())
+			    .then((data) => {
+			    	let title = document.querySelector("#apt-list-title");
+			    	title.innerHTML = `<h1 class="h1">거래 정보</h1>`;
+			    	const h5 = document.createElement('h5');
+			    	h5.innerHTML = aptName;
+			    	title.appendChild(h5);
+			    	
+			    	let parents = document.querySelector("#apt-list-ul");
+			    	let content = "";
+			    	data.forEach((house) => {
+			    		
+						let temp = `
+		          			<li>
+		          			 	<div class="apt-item">
+				                  <div class="apt-item-value apt-item-price">거래금액: ${house.dealAmount} 만원</div>
+				                  <div class="apt-item-value apt-item-area">면적: ${house.area}</div>
+				                  <div class="apt-item-value apt-item-date">거래일: ${house.dealYear}.${house.dealMonth}.${house.dealDay}</div>
+				                </div>
+		          			</li>
+						`;
+						
+						content += temp;
+					});
+			    	parents.innerHTML = content;
+			    });
+			  kakaoMap.setCenter(latlng);
+			  kakaoMap.setLevel(3);
+}
 
 document.querySelector("#sido").addEventListener("change", function () {
   if (this[this.selectedIndex].value) {

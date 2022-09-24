@@ -31,6 +31,9 @@
 			            <a class="nav-link" href="#">관심지역 둘러보기</a>
 		            </li>
 		            <li class="nav-item">
+			            <a class="nav-link" href="${root}/notice/notice.do">공지사항</a>
+		            </li>
+		            <li class="nav-item">
 		              	<a class="nav-link" href="${root}/user/logout.do" id="logout">로그아웃</a>
 	              	</li>
 	              	<li class="nav-item">

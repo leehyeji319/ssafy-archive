@@ -56,7 +56,7 @@
               </h1>
               
               
-             <jsp:include page="/commons/houseSelect.jsp"/>
+             <jsp:include page="/houseSelect.jsp"/>
              
             </div>
           </div>
