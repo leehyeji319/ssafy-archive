@@ -75,9 +75,7 @@ function register() {
             </div>
             <div class="mb-3">
               <label for="content" class="form-label">내용</label>
-              <textarea class="form-control" id="content" name="content" required>
-				
-              </textarea>
+              <textarea class="form-control" id="content" name="content" required /></textarea>
             </div>
             <a href="${root}/notice/notice.do" class="btn btn-outline-secondary">글 목록</a>
 			<input type="submit" class="btn btn-outline-warning" value="등록" />

@@ -43,6 +43,11 @@ public class HouseController implements Controller{
 		String dongcode = request.getParameter("dongcode");
 		
 		List<HouseInfoDto> houseList = houseService.getHouseList(dongcode);
+		
+		for (HouseInfoDto houseInfoDto : houseList) {
+			System.out.println(houseInfoDto.toString());
+		}
+		
 		request.setAttribute("houseList", houseList);
 		return new PageInfoDto(true, "/house/list.jsp");
 	}

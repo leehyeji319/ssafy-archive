@@ -6,4 +6,3 @@ create table userinfo
 	address varchar(100) not null,
 	phone varchar(30) not null
 );
-

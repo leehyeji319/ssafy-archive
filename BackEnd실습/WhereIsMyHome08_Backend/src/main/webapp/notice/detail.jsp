@@ -94,7 +94,8 @@ function deleteNotice() {
 							<a href="${root}/notice/notice.do"
 								class="btn btn-outline-secondary">글 목록</a>
 							<c:if test="${userid eq 'admin'}">
-								<a href="${root}/notice/noticeUpdate_form.do?noticeid=${notice.noticeId}"
+								<a
+									href="${root}/notice/noticeUpdate_form.do?noticeid=${notice.noticeId}"
 									class="btn btn-outline-warning">수정</a>
 								<a class="btn btn-outline-danger" onclick="deleteNotice()">삭제</a>
 							</c:if>

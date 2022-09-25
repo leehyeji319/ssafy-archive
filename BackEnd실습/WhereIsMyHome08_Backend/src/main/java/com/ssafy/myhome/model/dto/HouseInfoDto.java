@@ -139,6 +139,15 @@ public class HouseInfoDto {
 	public void setLng(String lng) {
 		this.lng = lng;
 	}
+
+	@Override
+	public String toString() {
+		return "HouseInfoDto [aptCode=" + aptCode + ", dealAmount=" + dealAmount + ", dealYear=" + dealYear
+				+ ", dealMonth=" + dealMonth + ", dealDay=" + dealDay + ", area=" + area + ", floor=" + floor
+				+ ", type=" + type + ", aptName=" + aptName + ", dongCode=" + dongCode + ", dongName=" + dongName
+				+ ", lat=" + lat + ", lng=" + lng + "]";
+	}
+	
 	
 	
 }

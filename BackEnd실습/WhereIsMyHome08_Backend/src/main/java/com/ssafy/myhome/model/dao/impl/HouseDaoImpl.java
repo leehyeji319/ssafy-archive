@@ -42,8 +42,11 @@ public class HouseDaoImpl implements HouseDao {
 				+ "where b.dongCode = ? and a.aptcode = b.aptcode\r\n"
 				+ "order by aptName) a\r\n"
 				+ "where n <= 1\r\n"
-				+ "group by aptcode\r\n"
+//				+ "group by aptcode\r\n"
 				+ "order by aptName;";
+		
+		
+		System.out.println(dongcode);
 		
 		try {
 			conn = dbUtil.getConnection();

@@ -138,8 +138,8 @@ function deleteNotice() {
 							</div>
 							<div class="mb-3">
 								<label for="content" class="form-label">내용</label>
-								<textarea class="form-control" id="content" name="content">
-									${notice.content}
+								<textarea class="form-control" id="content" 
+								name="content">${notice.content}
               					</textarea>
 							</div>
 							<div class="mb-3">
