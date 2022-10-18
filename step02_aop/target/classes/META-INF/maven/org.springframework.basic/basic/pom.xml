@@ -10,11 +10,11 @@
 		<java.version>1.8</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
 		<!-- Spring -->
 		<org.springframework-version>5.3.23</org.springframework-version>
 <!-- 		<org.springframework-version>5.2.6.RELEASE</org.springframework-version> -->
-
+		<org.aspectj-version>1.9.9.1</org.aspectj-version>
+		
 	</properties>
 	
 	<dependencies>
@@ -37,5 +37,17 @@
 			<version>${org.springframework-version}</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- AspectJ :: AOP -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${org.aspectj-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${org.aspectj-version}</version>
+		</dependency>	
 	</dependencies>	
 </project>
