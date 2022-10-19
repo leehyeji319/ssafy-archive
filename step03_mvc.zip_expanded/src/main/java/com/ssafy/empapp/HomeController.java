@@ -1,4 +1,4 @@
-package com.ssafy.myapp;
+package com.ssafy.empapp;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -33,7 +33,7 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "home"; //여기 접두사로 forward, redirect등 이렇게붙는다. 이건 접두사 없으니까foward처리
+		return "home";
 	}
 	
 }
