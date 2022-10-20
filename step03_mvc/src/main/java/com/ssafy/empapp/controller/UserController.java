@@ -42,8 +42,8 @@ public class UserController{
 		return "redirect:/index.do";
 	}
 	
-	@GetMapping("/login_form.do")
-	protected String loginForm() throws Exception {
-		return "user/login";
-	}
+//	@GetMapping("/login_form.do")
+//	protected String loginForm() throws Exception {
+//		return "user/login";
+//	}
 }

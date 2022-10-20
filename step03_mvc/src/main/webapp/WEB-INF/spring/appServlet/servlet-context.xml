@@ -23,6 +23,15 @@
 	
 	<context:component-scan base-package="com.ssafy.empapp.controller" />
 	
+	<view-controller path="/user/login_form.do" view-name="user/login"/>
+	<view-controller path="/dept/register_form.do" view-name="dept/register_form"/>
 	
+	<interceptors>
+		<interceptor>
+			<!-- dept로 시작하는 모든 경로 (만약 타면안되는 놈이 잇으면 exclude) -->
+			<mapping path="/dept/**"/>
+			<beans:bean class="com.ssafy.empapp.controller.interceptor.LoginCheckInterceptor"></beans:bean>
+		</interceptor>
+	</interceptors>
 	
 </beans:beans>
