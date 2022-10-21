@@ -14,7 +14,10 @@
 	<context:component-scan base-package="com.ssafy.empapp.model"/>
 	<context:property-placeholder location="classpath:db.properties"/>
 	
-	<mybatis-spring:scan base-package="com.ssafy.empapp.model.dao"/>
+	<mybatis-spring:scan base-package="com.ssafy.empapp.model.dao"
+		annotation="org.apache.ibatis.annotations.Mapper"
+		
+		/>
 	
 	<bean id="ds" class="org.springframework.jdbc.datasource.SimpleDriverDataSource"
 		p:driverClass="${db_driver}"
