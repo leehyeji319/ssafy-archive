@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.empapp.model.dao.DeptDAO">
+	<insert id="insertDept" parameterType="Dept">
+		insert into dept(deptno,dname,loc) values(#{deptno}, #{dname}, #{loc})
+	</insert>
+	
+	<update id="updateDept" parameterType="Dept">
+		update dept set dname = #{dname},loc = #{loc} where deptno = #{deptno}
+	</update>
+	
+	<delete id="deleteDept" parameterType="int">
+		delete from dept where deptno = #{deptno}
+	</delete>
+	
+	<!-- chunk of repeative sql statement -->
+	<sql id="basicSelectSQL">
+		select deptno,dname,loc from dept
+	</sql>
+	
+	<!-- resultType = return type for each record -->
+	<select id="selectDepts" resultType="Dept">
+		<include refid="basicSelectSQL" />
+	</select>
+	
+	<!-- resultType = return type for each record -->
+	<select id="selectDept" parameterType="int" resultType="Dept">
+		<include refid="basicSelectSQL" />
+		where deptno = #{deptno}
+	</select>
+</mapper>

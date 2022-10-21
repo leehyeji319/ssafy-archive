@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssafy.empapp.model.dto.Dept;
@@ -15,28 +17,13 @@ import com.ssafy.empapp.util.DBUtil;
 @Repository("deptDao")
 public class DeptDAOImpl implements DeptDAO {
 	
+	@Autowired
+	private SqlSession session;
+	private static final String DEPT_NS = "com.ssafy.empapp.model.dao.DeptDAO."; 
+	
 	@Override
-	public int insertDept(Dept dept) throws SQLException {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		String sql = "insert into dept(deptno,dname,loc) values(?,?,?)";
-		try {
-			// step2
-			conn = DBUtil.getConnection();
-			
-			// step3
-			pstmt = conn.prepareStatement(sql);
-			
-			// step4
-			pstmt.setInt(1, dept.getDeptno());
-			pstmt.setString(2, dept.getDname());
-			pstmt.setString(3, dept.getLoc());
-			int rowCnt = pstmt.executeUpdate();
-			
-			return rowCnt;
-		} finally {
-			DBUtil.close(pstmt, conn);
-		}
+	public int insertDept(Dept dept) {
+		return session.insert(DEPT_NS+"insertDept", dept);
 	}
 	
 	@Override
@@ -112,26 +99,7 @@ public class DeptDAOImpl implements DeptDAO {
 		
 		@Override
 		public int updateDept(Dept dept) throws SQLException {
-			Connection conn = null;
-			PreparedStatement pstmt = null;
-			String sql = "update dept set dname = ?, loc = ? where deptno = ?";
-			try {
-				// step2
-				conn = DBUtil.getConnection();
-				
-				// step3
-				pstmt = conn.prepareStatement(sql);
-				
-				// step4
-				pstmt.setString(1, dept.getDname());
-				pstmt.setString(2, dept.getLoc());
-				pstmt.setInt(3, dept.getDeptno());
-				int rowCnt = pstmt.executeUpdate();
-				
-				return rowCnt;
-			} finally {
-				DBUtil.close(pstmt, conn);
-			}
+			return session.update(DEPT_NS+"updateDept", dept);
 		}
 }
 
