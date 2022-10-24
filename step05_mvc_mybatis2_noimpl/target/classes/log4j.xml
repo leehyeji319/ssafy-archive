@@ -12,7 +12,7 @@
 	
 	<!-- Application Loggers -->
 	<logger name="com.ssafy.empapp">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
@@ -33,6 +33,7 @@
 	</logger>
 
 	<!-- Root Logger -->
+	<!-- 기본적으로 설정하고 싶은 애들을 루트 로거에 -->
 	<root>
 		<priority value="warn" />
 		<appender-ref ref="console" />

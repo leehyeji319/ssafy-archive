@@ -19,7 +19,7 @@
 		select deptno, dname, loc from dept
 	</sql>
 	
-	<select id="selectDepts" resultType="Dept"> <!-- 하나의 레코드를 어떻게 표현할 것인가가 resultType이다 -->
+	<select id="selectDepts" resultMap="DeptResultMap"> <!-- 하나의 레코드를 어떻게 표현할 것인가가 resultType이다 -->
 		<include refid="basicSelectSQL"/>
 	</select>
 	
@@ -28,4 +28,10 @@
 		where deptno = #{param} <!-- 파라미터 타입이 맵이나 DTO가 아니고 유일한 값일 땐 deptno라고 안 쓰고 아무거나 써도 됨 -->
 	</select>
 	
+	<!-- 레코드 하나를 해당 타입에 어떻게 매핑시켜 담아야하는지의 매핑전략 -->
+	<resultMap type="Dept" id="DeptResultMap">
+		<id column="deptno" property="deptno"/>
+		<result column="dname" property="dname"/>
+		<result column="loc" property="loc"/>
+	</resultMap>
 </mapper>
