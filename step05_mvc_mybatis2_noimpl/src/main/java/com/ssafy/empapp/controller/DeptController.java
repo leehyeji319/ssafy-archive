@@ -19,27 +19,27 @@ import org.springframework.web.servlet.view.InternalResourceView;
 import com.ssafy.empapp.model.dto.Dept;
 import com.ssafy.empapp.model.service.DeptService;
 
-@RequestMapping("/dept/")
+@RequestMapping("/dept")
 @Controller
 public class DeptController {
 	
 	@Autowired
 	private DeptService deptService;
 	
-	@RequestMapping("list.do")
+	@RequestMapping("/list.do")
 	protected String getDeptList(Model model) throws Exception {
 		List<Dept> depts = deptService.getDepts();
 		model.addAttribute("deptList", depts);
 		return "dept/list";
 	}
 	
-	@RequestMapping("rest/list.do")
+	@RequestMapping("/rest/list.do")
 	@ResponseBody
 	protected List<Dept> getDeptRestList() throws Exception {
 		return deptService.getDepts();
 	}
 	
-	@RequestMapping("detail.do")
+	@RequestMapping("/detail.do")
 	protected ModelAndView getDeptDetail(@RequestParam int deptno) throws Exception {
 		Dept dept = deptService.getDept(deptno);
 		ModelAndView mav = new ModelAndView();
@@ -48,7 +48,16 @@ public class DeptController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "register.do", method = RequestMethod.POST)
+	@RequestMapping("/detail_with_emps.do")
+	protected ModelAndView getDeptDetailWithEmps(@RequestParam int deptno) throws Exception {
+		Dept dept = deptService.getDeptWithEmps(deptno);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("dept", dept);
+		mav.setViewName("dept/detail_form_emps");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/register.do", method = RequestMethod.POST)
 	protected String registerDept(@RequestParam int deptno, @RequestParam String dname, @RequestParam String loc, Model model) throws Exception {
 		boolean res = deptService.registerDept(new Dept(deptno, dname, loc));
 		
@@ -75,7 +84,7 @@ public class DeptController {
 //		return mav;
 //	}
 	
-	@PostMapping("modify.do")
+	@PostMapping("/modify.do")
 	protected String modifyDept(Dept dept, RedirectAttributes rAttributes) throws Exception {
 		boolean res = deptService.modifyDept(dept);
 		
@@ -88,7 +97,7 @@ public class DeptController {
 		return "redirect:/dept/list.do";
 	}
 	
-	@GetMapping("remove.do")
+	@GetMapping("/remove.do")
 	protected ModelAndView removeDept(int deptno) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		

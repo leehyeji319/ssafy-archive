@@ -21,6 +21,9 @@
         <div class="row mt-3">
             <h2 class="bg-primary text-light text-center">부서 목록</h2>
         </div>
+        <div>
+        	<span>부서 검색</span>
+        </div>
 		<div class = "row">
 			<table class = "table">
 				<thead>
@@ -39,7 +42,9 @@
 							<c:forEach items="${requestScope.deptList}" var="dept">
 							<tr>
 											<td>${dept.deptno}</td>			
-											<td><a href="${root}/dept/detail.do?deptno=${dept.deptno}">${dept.dname}</a></td>			
+						
+										<%-- 	<td><a href="${root}/dept/detail.do?deptno=${dept.deptno}">${dept.dname}</a></td>	 --%>	
+											<td><a href="${root}/dept/detail_with_emps.do?deptno=${dept.deptno}">${dept.dname}</a>	
 											<td>${dept.loc}</td>
 										</tr>
 							</c:forEach>

@@ -20,4 +20,5 @@ public interface DeptDAO {
 
 	int updateDept(Dept dept);
 
+	Dept selectDeptWithEmps(int deptno);
 }

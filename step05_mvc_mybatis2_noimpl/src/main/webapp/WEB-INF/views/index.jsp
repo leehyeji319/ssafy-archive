@@ -14,6 +14,11 @@
 		<li> <a href="${root}/dept/register_form.do">부서 등록</a> </li>
 		<li> <a href="${root}/dept/list.do">부서 목록</a> </li>
 		<li> <a href="${root}/dept/rest/list.do">부서 목록 - JSON</a> </li>
+		</br>
+		<li> <a href="${root}/emp/register_form.do">사원 등록</a> </li>
+		<li> <a href="${root}/emp/list.do">사원 목록</a> </li>
+		<li> <a href="${root}/emp/rest/list.do">사원 목록 - JSON</a> </li>
+		
 	</ul>
 </body>
 </html>

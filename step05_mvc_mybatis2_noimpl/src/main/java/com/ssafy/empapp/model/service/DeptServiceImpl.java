@@ -22,29 +22,34 @@ public class DeptServiceImpl implements DeptService {
 	}
 
 	@Override
-	public boolean registerDept(Dept dept) throws Exception {
+	public boolean registerDept(Dept dept){
 		return deptDao.insertDept(dept) > 0;
 	}
 
 	@Override
-	public List<Dept> getDepts() throws Exception {
+	public List<Dept> getDepts(){
 		System.out.println("부서 목록 조회");
         logger.info("부서 목록 조회");
 		return deptDao.selectDepts();
 	}
 
 	@Override
-	public Dept getDept(int deptno) throws Exception {
+	public Dept getDept(int deptno){
 		return deptDao.selectDept(deptno);
 	}
 
 	@Override
-	public boolean deleteDept(int deptno) throws Exception {
+	public boolean deleteDept(int deptno){
 		return deptDao.deleteDept(deptno) > 0;
 	}
 
 	@Override
-	public boolean modifyDept(Dept dept) throws Exception {
+	public boolean modifyDept(Dept dept) {
 		return deptDao.updateDept(dept) > 0;
+	}
+
+	@Override
+	public Dept getDeptWithEmps(int deptno) {
+		return deptDao.selectDeptWithEmps(deptno);
 	}
 }
