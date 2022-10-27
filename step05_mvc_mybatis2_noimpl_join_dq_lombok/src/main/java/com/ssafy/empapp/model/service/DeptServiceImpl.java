@@ -13,7 +13,7 @@ import com.ssafy.empapp.model.dto.Dept;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Transactional
+//@Transactional
 @Slf4j
 @Service
 // Model : B/L
@@ -36,7 +36,7 @@ public class DeptServiceImpl implements DeptService {
 	}
 	
 	
-	@Transactional(readOnly = true)
+//	@Transactional(readOnly = true)
 	@Override
 	public List<Dept> getDepts(){
 		
