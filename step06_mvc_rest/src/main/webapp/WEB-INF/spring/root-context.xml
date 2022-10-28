@@ -39,21 +39,24 @@
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
 		p:dataSource-ref="ds"
 	/>
-	<!-- <tx:annotation-driven transaction-manager="transactionManager"/> -->
-	
+<!-- 	<tx:annotation-driven transaction-manager="transactionManager"/> -->
+
 	<tx:advice id="txAdvice">
 		<tx:attributes>
-			<tx:method name="register*"/>
-			<tx:method name="modify*"/>
-			<tx:method name="delete*"/>
+			<tx:method name="register*" />
+			<tx:method name="modify*" />
+			<tx:method name="delete*" />
 			<tx:method name="get*" read-only="true"/>
-			<tx:method name="login*" read-only="true"/>
+			<tx:method name="login" read-only="true"/>
 		</tx:attributes>
 	</tx:advice>
-	
+
 	<aop:config>
 		<aop:advisor advice-ref="txAdvice" pointcut="within(com.ssafy.empapp.model.service.*)"/>
 	</aop:config>
+	
+	
+
 </beans>
 
 
