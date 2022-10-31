@@ -67,7 +67,7 @@ public class BoardController {
 //		FileUpload 관련 설정.
 		logger.debug("MultipartFile.isEmpty : {}", files[0].isEmpty());
 		if (!files[0].isEmpty()) {
-			String realPath = servletContext.getRealPath("/upload");
+			String realPath = servletContext.getRealPath("/upload"); //mac은 엉뚱한곳으로 됨.. 루트라 ㅠ
 //			String realPath = servletContext.getRealPath("/resources/img");
 			String today = new SimpleDateFormat("yyMMdd").format(new Date());
 			String saveFolder = realPath + File.separator + today;
