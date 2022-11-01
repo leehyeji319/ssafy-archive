@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ssafy</groupId>
-	<artifactId>step07_mvc_boot</artifactId>
+	<artifactId>step08_mvc_boot_rest</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>step07_mvc_boot</name>
+	<name>step08_mvc_boot_rest</name>
 	<description>board project for Spring Boot</description>
 	<properties>
 		<java.version>1.8</java.version>
@@ -55,13 +55,14 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<!-- JSP Setting -->
 		<dependency>
-		    <groupId>org.apache.tomcat.embed</groupId>
-		    <artifactId>tomcat-embed-jasper</artifactId>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
 		</dependency>
 		<dependency>
-		    <groupId>javax.servlet</groupId>
-		    <artifactId>jstl</artifactId>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
 		</dependency>
 		
 		   <!-- AspectJ :: AOP -->

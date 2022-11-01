@@ -9,7 +9,6 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.ssafy.empapp.controller.interceptor.LoginCheckInterceptor;
 import com.ssafy.empapp.listener.AppInitListener;
 
 @Configuration
@@ -36,8 +35,4 @@ public class WebConfig implements WebMvcConfigurer {
 		registry.addViewController("/dept/register_form.do").setViewName("dept/register_form");
 	}
 	
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new LoginCheckInterceptor()).addPathPatterns("/dept/**"); //가변인자
-	}
 }
