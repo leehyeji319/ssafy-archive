@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // ... : spread 연산자(전개 연산자)
+
+    let p1 = {
+      name: "김재환",
+      age: 27,
+
+    };
+
+    let info = {
+      tel: "010-1111-2222",
+      address: "서울"
+    };
+
+    let obj = {
+      name: p1.name, age: p1.age,
+      tel: info.tel, address: info.address
+    };
+    let obj2 = { ...p1, ...info };
+    console.log(obj);
+    console.log(obj2);
+
+    function change1(person) {
+      person.age++;
+      console.log(person === p1, p1.age, person.age);
+    }
+
+    // change1(p1);
+    change1({ ...p1 }) //얘는 받은 객체가 나이가 28 but 원본객체는 27살이야
+
+  </script>
+</body>
+
+</html>
