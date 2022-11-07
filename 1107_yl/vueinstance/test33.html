@@ -12,10 +12,12 @@
   <div id="app">
     <div>
       아이디 :
-      <input v-model.trim="id" placeholder="아이디를 입력하세요" />
+      <!-- trim은 공백제거 -->
+      <input v-model.number="num" placeholder="숫자를 입력하세요" />
       <!-- v-model은 기본적으로 모든 key stroke가 발생할 때마다 값을 업데이트 시킨다.
            .lazy 수식어를 추가하여 change 이벤트 이후에 동기화 할 수 있습니다. -->
-      <input v-model.lazy="id" placeholder="아이디를 입력하세요" />
+      <!-- v-model이 데이터를 그대로 받아들이는건데, 포커스를 떼고 나서 반영 -->
+      <input v-model.trim.lazy="id" placeholder="아이디를 입력하세요" />
     </div>
     <div>
       메세지 :
@@ -27,6 +29,7 @@
     new Vue({
       el: '#app',
       data: {
+        num: 0,
         id: '',
         message: '',
       },

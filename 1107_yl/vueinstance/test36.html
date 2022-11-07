@@ -26,10 +26,11 @@
     <span>선택한 지역 : {{ ckArea }}</span>
   </div>
   <script>
+    //radio
     new Vue({
       el: '#app',
       data: {
-        ckArea: '광주',
+        ckArea: '광주', //checkbox가 아닌 radio는 단일값이라 이미 선택되어있다.
       },
     });
   </script>

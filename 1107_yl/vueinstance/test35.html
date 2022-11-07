@@ -25,10 +25,11 @@
     <span>체크한 이름: {{ checkedAreas }}</span>
   </div>
   <script>
+    //checkbox
     new Vue({
       el: '#app',
       data: {
-        checkedAreas: [],
+        checkedAreas: [], //v-model만 해주면 checkbox와 연결되어있다. 바로 가능
       },
     });
   </script>

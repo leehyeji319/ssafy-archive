@@ -21,7 +21,9 @@
 </head>
 
 <body>
+  <!-- 이 div는 가장 바깥에 있는거 (root) -->
   <div id="app">
+    <!-- active란걸 false 사용안할거야. true면 사용할거야. 이런식으로 동적으로 사용 가능-->
     <div v-bind:class="{ active: isActive }">VueCSS적용</div>
     <button v-on:click="toggle">VueCSS</button>
   </div>
