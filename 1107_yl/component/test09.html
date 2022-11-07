@@ -1,35 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vue.js</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  </head>
-  <body>
-    <h2>사용자 정의 이벤트</h2>
-    <div id="app">
-      <button v-on:click="doAction">메세지전송</button>
-      <h2>{{message}}</h2>
-    </div>
-    <script>
-      new Vue({
-        el: "#app",
-        data: {
-          message: "",
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vue.js</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <h2>사용자 정의 이벤트</h2>
+  <div id="app">
+    <!-- 클릭 전에 doAction 호출 -->
+    <button v-on:click="doAction">메세지전송</button>
+    <h2>{{message}}</h2>
+  </div>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        message: "",
+      },
+      methods: {
+        doAction() {
+          this.$emit("sendMsg", "안녕하세요 여러분"); //$emit event를 발생시켜라!! (커스텀 이벤트) 안녕하세요 여러분을 보내라
         },
-        methods: {
-          doAction() {
-            this.$emit("sendMsg", "안녕하세요 여러분");
-          },
-        },
-        created() {
-          this.$on("sendMsg", (msg) => {
-            alert(msg);
-            this.message = msg;
-          });
-        },
-      });
-    </script>
-  </body>
+      },
+      created() { //이 콜백함수에 안녕하세요 여러분이 들어가
+        this.$on("sendMsg", (msg) => { //귀 기울여 sendMsg 감시해 !!
+          alert(msg);
+          this.message = msg;
+        });
+      },
+    });
+    //emit 이벤트발생
+    //그걸 낚아채는게 on
+  </script>
+</body>
+
 </html>
