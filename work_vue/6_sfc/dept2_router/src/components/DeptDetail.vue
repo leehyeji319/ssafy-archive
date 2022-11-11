@@ -92,15 +92,11 @@
 </template>
 
 <script>
-import axios from "axios";
+import restApi from "@/util/http-common.js";
 export default {
-  props: {
-    deptno: {
-      type: Number,
-      required: false,
-      default: 10,
-    },
-  },
+  props: [ //동적라우팅이 바뀌면 프롭스로 바뀐걸 넣어준다. 컴포넌트 입장에선 프롭스가 계속 변경되고있엇고,
+     //그러니까 바꼇던 거야. -> 라우트를 watch처리
+    "deptno"],
   data() {
     return {
       dept: {},
@@ -110,33 +106,33 @@ export default {
   methods: {
     getDept() {
       if (this.deptno == 0) return;
-      axios.get(`http://localhost:8080/api/depts/${this.deptno}/emps`).then(({ data }) => (this.dept = data));
+      restApi.get(`/api/depts/${this.deptno}/emps`).then(({ data }) => (this.dept = data));
     },
     removeEmps() {
       let params = "";
       this.empnoList.forEach((item) => (params += `empno=${item}&`));
-      axios.delete(`http://localhost:8080/api/emps?${params}`).then(({ status }) => {
+      restApi.delete(`/api/emps?${params}`).then(({ status }) => {
         console.log(`removeEmps success : ${status}`);
         this.getEmps();
       });
     },
     getEmps() {
-      axios.get(`http://localhost:8080/api/emps?deptno=${this.dept.deptno}`).then(({ data }) => {
+      restApi.get(`/api/emps?deptno=${this.dept.deptno}`).then(({ data }) => {
         this.dept.emps = data;
         this.empnoList = [];
       });
     },
     modifyDept() {
-      axios.put(`http://localhost:8080/api/depts/${this.dept.deptno}`, this.dept).then(() => {
+      restApi.put(`/api/depts/${this.dept.deptno}`, this.dept).then(() => {
         console.log(`modifyDept success`);
-        this.$emit("change-data", "detail");
+        this.$emit("change-data");
       });
     },
     removeDept() {
-      axios.delete(`http://localhost:8080/api/depts/${this.dept.deptno}`).then(() => {
+      restApi.delete(`/api/depts/${this.dept.deptno}`).then(() => {
         console.log(`removeDept success`);
         this.clear();
-        this.$emit("change-data");
+        this.$router.push("/dept");
       });
     },
     clear() {

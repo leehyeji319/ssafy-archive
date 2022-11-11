@@ -13,7 +13,19 @@ const routes = [
   {
     path: '/dept',
     name: 'dept',
-    component: DeptView
+    component: DeptView,
+
+    children: [ //자식들의 경로 매칭
+      {
+        path: 'regForm',
+        component: () => import('@/components/DeptForm')
+      },
+      {
+        path: 'detail/:deptno', //경로의 일부분이 동적으로 바뀐다. :이름
+        props: true,
+        component: () => import('@/components/DeptDetail')
+      }
+    ],
   },
   {
     path: '/emp',

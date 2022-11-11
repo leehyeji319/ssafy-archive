@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import restApi from "@/util/http-common.js";
 export default {
   data() {
     return {
@@ -60,15 +60,16 @@ export default {
   },
   methods: {
     getDepts() {
-      axios.get("http://localhost:8080/api/depts").then(({ data }) => {
+      restApi.get("/api/depts").then(({ data }) => {
         this.depts = data;
       });
     },
     pickDept(deptno) {
       this.$emit("select-dept", deptno);
+      this.$router.push(`/dept/detail/${deptno}`)
     },
     changeForm() {
-      this.$emit("change-form", "register");
+      this.$router.push('/dept/regForm'); //여기서 슬래시 안붙이면 다 상대경로가 된다. 주의! 
     },
   },
   created() {
@@ -78,6 +79,14 @@ export default {
     refresh() {
       this.getDepts();
     },
+    //경로는 바꼈으니 WATCH를 건다
+    $route(to) { //새로이동할 밸류가 to, 바뀌기전 이전 라우터 정보 from
+      console.log("DeptList watch route");
+      if (to.path == "/dept") { //그녀석의 패쓰가 /dept때만 데이터를 갱신해라
+        console.log("get Depts ...")
+        this.getDepts();
+      }
+    }
   },
 };
 </script>

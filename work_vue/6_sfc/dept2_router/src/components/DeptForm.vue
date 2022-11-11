@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import restApi from "@/util/http-common.js";
 export default {
   data() {
     return {
@@ -48,10 +48,11 @@ export default {
   },
   methods: {
     registerDept() {
-      axios.post(`http://localhost:8080/api/depts`, this.dept).then(() => {
+      restApi.post(`/api/depts`, this.dept).then(() => {
         console.log(`registerDept success`);
         this.$emit("change-data");
         this.clear();
+        this.$router.push("/dept");
       });
     },
     clear() {

@@ -1,16 +1,15 @@
 <template>
   <div class="container" id="deptView">
     <h1>부서 관리</h1>
-    <dept-list :refresh="refresh" @select-dept="receiveDept" @change-form="changeForm"></dept-list>
-    <dept-detail v-show="mode == 'detail'" :deptno="deptno" @change-data="refreshData"></dept-detail>
-    <dept-form v-show="mode == 'register'" @change-data="refreshData"></dept-form>
+    <dept-list :refresh="refresh" ></dept-list>
+    <router-view @change-data="refreshData"></router-view>
+    <!-- <dept-detail v-show="mode == 'detail'" :deptno="deptno" @change-data="refreshData"></dept-detail>
+    <dept-form v-show="mode == 'register'" @change-data="refreshData"></dept-form> -->
   </div>
 </template>
 
 <script>
 import DeptList from "@/components/DeptList.vue";
-import DeptDetail from "@/components/DeptDetail.vue";
-import DeptForm from "@/components/DeptForm.vue";
 
 export default {
   data() {
@@ -22,25 +21,12 @@ export default {
   },
   components: {
     DeptList,
-    DeptDetail,
-    DeptForm,
+    //라우터에서 이미 받아왔으니까 컴포넌트 임포트 없애도됨
   },
   methods: {
-    receiveDept(deptno) {
-      this.deptno = deptno;
-      this.mode = "detail";
-    },
-    refreshData(payload) {
+    refreshData() {
       this.refresh = new Date().getTime();
-      if (payload == null) {
-        this.mode = "";
-      } else {
-        this.mode = payload;
-      }
       console.log(`refresh reset`);
-    },
-    changeForm(payload) {
-      this.mode = payload;
     },
   },
 };
