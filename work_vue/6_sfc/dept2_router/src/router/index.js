@@ -30,7 +30,20 @@ const routes = [
   {
     path: '/emp',
     name: 'emp',
-    component: EmpView
+    component: EmpView,
+
+    children: [
+      {
+        path: 'regForm',
+        component: () => import('@/components/EmpForm')
+      },
+      {
+        path: 'detail/:empno',
+        props: true,
+        component: () => import('@/components/EmpDetail')
+      }
+    ]
+
   },
 ]
 

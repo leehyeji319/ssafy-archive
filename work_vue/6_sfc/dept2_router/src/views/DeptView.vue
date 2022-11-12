@@ -26,7 +26,7 @@ export default {
   methods: {
     refreshData() {
       this.refresh = new Date().getTime();
-      console.log(`refresh reset`);
+      console.log('refresh reset');
     },
   },
 };
