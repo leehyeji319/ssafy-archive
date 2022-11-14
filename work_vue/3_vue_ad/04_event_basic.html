@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <h1>{{count}}</h1>
+    <!-- v-on: 뷰인스턴스가 관리해야하는 녀석이다. 뷰인스턴스가 가지고있는 메서드 이름으로 인식함 -->
+    <!-- 이름만 올수도 있고 -->
+    <button v-on:click="increase">증가</button>
+    <!-- ()이렇게 해서 여러개 부를 수도 있다. 건내줄 값이 있으면 매개변수도 넣어줄수있다-->
+    <button @click="decrease();">감소</button>
+  </div>
+  <script>
+    new Vue({
+      el: "app",
+      data: {
+        count: 0,
+      },
+      methods: {
+        decrease() { //컨사이스 메서드 써야함. arrow func 금지!
+          this.count--;
+        },
+        increase() {
+          this.count++;
+        }
+      },
+    });
+  </script>
+</body>
+
+</html>

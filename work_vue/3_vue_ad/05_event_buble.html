@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    div {
+      padding: 20px;
+    }
+
+    #outer {
+      background-color: skyblue;
+    }
+
+    #middle {
+      background-color: greenyellow;
+    }
+
+    #inner {
+      background-color: rebeccapurple;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- self는 본인이 이벤트를 발생시킨 소스일때만 반응하겠다 -->
+    <div id="outer" @click.self="func1">1
+      <!-- <div id="outer" @click="func1">1 -->
+      <!-- once는 내가 하던 남이 날 부르던 딱 한번만! -->
+      <div id="middle" @click.once="func2">2
+        <!-- <div id="middle" @click="func2">2 -->
+        <!-- <div id="inner" @click.stop="func3">3</div> -->
+        <div id="inner" @click="func3">3</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    new Vue({
+      el: "#app",
+      methods: {
+        func1() {
+          console.log("1-outer");
+        },
+        func2() {
+          console.log("2-middle");
+        },
+        func3() {
+          console.log("3-inner");
+          // event.stopPropagation();
+        },
+      },
+    });
+  </script>
+</body>
+
+</html>

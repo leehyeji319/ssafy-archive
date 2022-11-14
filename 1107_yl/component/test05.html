@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vue.js</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <h2>컴포넌트 데이터 공유 문제 해결</h2>
+  <div id="app"> //얘는 지역화가 되어있음
+    <count-view></count-view>
+    <count-view></count-view>
+    <count-view></count-view>
+  </div>
+  <template id="countview">
+    <div>
+      <span>{{ count }}</span>
+      <button @click="count++">클릭</button>
+    </div>
+  </template>
+  <!-- 여기까진 똑같음 -->
+  <script>
+    //but 카운트라는 변수가 아깐 바깥에객체로 만들엇지만 지금은 컴포넌트 안에있음
+    Vue.component("count-view", {
+      template: "#countview",
+      data() {
+        return { //안에 있으니까 부를때마다 새로 만들어지겟지 ?
+          count: 0,
+        };
+      },
+    });
+    //정리: 한번에 하고싶다. 그러면 객체를 밖에 만들고, 아니면 안에 만들고
+    //정리: 객체는 레퍼런스! 
+    new Vue({
+      el: "#app",
+    });
+  </script>
+</body>
+
+</html>

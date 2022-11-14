@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<div id="app">
+  <div>검색가격: <input type="number" v-model.number.lazy="searchPrice" /></div>
+  <table>
+    <thead>
+      <tr>
+        <th>번호</th>
+        <th>상품코드</th>
+        <th>상품명</th>
+        <th>가격</th>
+      </tr>
+    </thead>
+    <tbody>
+      <template v-if="products.legnth>0">
+        <tr v-for="(product, index) in products" :key="product.no">
+          <td>{{index + 1}}</td>
+          <td>{{product.no}}</td>
+          <td>{{product.name}}</td>
+          <td>{{product.price}}</td>
+        </tr>
+      </template>
+      <tr v-else>
+        <td colspan="4">부합하는 상품이 없습니다.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<body>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        searchPrice: 0,
+        orgproducts: [
+          { no: 11, name: "노트북", price: 2000000 },
+          { no: 22, name: "태블릿", prㅣice: 7000000 },
+          { no: 33, name: "공청기", price: 1000000 },
+
+        ]
+      },
+      computed: {
+        products() {
+          //this.해서 오리지널프로덬트에 접근한다.
+          //searchPrice의 this 상위 스코프의 this를 쓰려고 에로우펑션 쓴거임
+          return this.orgproducts.filter((item) => item.price >= this.searchPrice);
+        }
+      },
+    });
+
+  </script>
+</body>
+
+</html>

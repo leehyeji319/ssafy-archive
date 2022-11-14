@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vue.js</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" v-model="message" />
+    <p>원본 메시지: "{{ message }}"</p>
+    <!-- 여기엔 중괄호 열고닫고가 없다 -->
+    <p>역순으로 표시한 메시지1: "{{ reversedMsg }}"</p>
+    <p>역순으로 표시한 메시지2: "{{ reversedMsg }}"</p>
+    <p>역순으로 표시한 메시지3: "{{ reversedMsg }}"</p>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        // 뷰라는 객체의 종속적인 message라는 데이터가 바뀌엇을 때만 호출이 된다!!!!!
+        message: '안녕하세요 싸피여러분',
+        a: "",
+      },
+      //얘는 컴퓨티드
+      //얘는 만들어놓고 메서드처럼 쓰는게 아니라 뷰라는 객체의 종속적인 message라는 데이터가 바뀌엇을 때만 호출이 된다!!!!!
+      computed: {
+        reversedMsg: function () {
+          console.log('꺼꾸로 찍기'); //얘는 한번 나옴 콘솔에 
+          this.a = 20; //이건 바뀌지않지 왜냐면 안바꼇자나
+          return this.message.split('').reverse().join('');
+        },
+      },
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">{{ message }}</div>
+  <script>
+    //Vue의 LifeCycle
+    new Vue({
+      el: "#app",
+      data: {
+        message: "Life Cycle Hooks",
+      },
+      created() {
+        console.log("create call!!!");
+
+      },
+      mounted() {
+        console.log("mounted call!!!");
+        this.message = "Hello";
+      },
+      //데이터가 바뀌고 나면 화면이 전환이 되어야하니까 updated가 호출된다.
+      updated() {
+        console.log("updated call!!!");
+      },
+    });
+  </script>
+</body>
+
+</html>
