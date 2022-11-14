@@ -12,6 +12,7 @@
     </b-row>
     <b-row>
       <b-col>
+        <!-- 이렇게만 설정하면 테이블 만들어줌!! 뷰트스트랩에서..공식독 꼭확인하기 -->
         <b-table striped hover :items="articles" :fields="fields" @row-clicked="viewArticle"> </b-table>
       </b-col>
     </b-row>

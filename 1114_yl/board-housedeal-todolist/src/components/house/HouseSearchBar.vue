@@ -11,6 +11,7 @@
       <b-button variant="outline-primary" @click="sendKeyword">검색</b-button>
     </b-col> -->
     <b-col class="sm-3">
+      <!-- sidos가 바뀌면 options로 자동으로 부트스트랩이 돌려준다. -->
       <b-form-select v-model="sidoCode" :options="sidos" @change="gugunList"></b-form-select>
     </b-col>
     <b-col class="sm-3">
@@ -54,11 +55,12 @@ export default {
     // },
     gugunList() {
       // console.log(this.sidoCode);
-      this.CLEAR_GUGUN_LIST(); //기존에 있떤거는지워버려라
+      this.CLEAR_GUGUN_LIST(); //기존에 있떤거는지워버려라. 안그러면 계속 쌓이니까
       this.gugunCode = null;
       if (this.sidoCode) this.getGugun(this.sidoCode); //이 메서드는 mapActions에서 가져옴
+      //여기 this.getGugun 에서 axios호출
     },
-    searchApt() {
+    searchApt() { //여기서 또 axios로 받아오겟네
       if (this.gugunCode) this.getHouseList(this.gugunCode);
     },
   },

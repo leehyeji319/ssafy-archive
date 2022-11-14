@@ -22,6 +22,7 @@ export default {
     };
   },
   methods: {
+    //자 여기를 mapActions, mapGetters, mapMutations 로 바꿔보세요. 숙제임~~~
     createTodo() {
       //   console.log('Create Todo!!');
       //   console.log(this.$store);

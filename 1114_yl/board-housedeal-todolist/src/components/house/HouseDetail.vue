@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from "vuex"; //하우스가 바뀌면 ,,, 바껴 v-show로 보여줌! 
 
 export default {
   name: "HouseDetail",

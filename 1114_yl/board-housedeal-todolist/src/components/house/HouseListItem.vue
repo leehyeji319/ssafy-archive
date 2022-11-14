@@ -26,12 +26,12 @@ export default {
   props: {
     house: Object,
   },
-  methods: {
+  methods: { 
     ...mapActions(["detailHouse"]),
     selectHouse() {
       console.log("listRow : ", this.house);
       // this.$store.dispatch("getHouse", this.house);
-      this.detailHouse(this.house);
+      this.detailHouse(this.house); //아파트를 내가 클릭하면 내가 클릭한 아파트상세정보를 또 서버에서 얻어와야함 axios!
     },
     colorChange(flag) {
       this.isColor = flag;

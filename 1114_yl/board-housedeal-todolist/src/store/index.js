@@ -34,7 +34,7 @@ export default new Vuex.Store({
   mutations: {
     /////////////////////////////// House start /////////////////////////////////////
     SET_SIDO_LIST(state, sidos) { //mutations는 첫번째에 꼭 state 받아야함!! 받아온 sidos
-      sidos.forEach((sido) => { //sido목록만큼 포문을 돌려서
+      sidos.forEach((sido) => { //sido목록만큼 포문을 돌려서 //위에잇는 sidos에 넣어라 ~ 
         state.sidos.push({ value: sido.sidoCode, text: sido.sidoName }); //객체로 만들어서 호출하겠다
       });
     },
@@ -53,10 +53,10 @@ export default new Vuex.Store({
     CLEAR_GUGUN_LIST(state) {
       state.guguns = [{ value: null, text: "선택하세요" }];
     },
-    SET_HOUSE_LIST(state, houses) {
+    SET_HOUSE_LIST(state, houses) { //state.houses 에 배열 houses를 집어넣어라!
       state.houses = houses;
     },
-    SET_DETAIL_HOUSE(state, house) {
+    SET_DETAIL_HOUSE(state, house) { //state에 house넣어
       // console.log("Mutations", house);
       state.house = house;
     },
@@ -103,7 +103,7 @@ export default new Vuex.Store({
           console.log(error);
         });
     },
-    getGugun({ commit }, sidoCode) {
+    getGugun({ commit }, sidoCode) { //axios 받아옴
       const params = { sido: sidoCode };
       http
         .get(`/map/gugun`, { params })
@@ -119,7 +119,9 @@ export default new Vuex.Store({
       // vue cli enviroment variables 검색
       //.env.local file 생성.
       // 반드시 VUE_APP으로 시작해야 한다.
+      //아래에서 불러오려면 꼭 process.env로 시작되면 좋다.
       const SERVICE_KEY = process.env.VUE_APP_APT_DEAL_API_KEY;
+      //여기에 넣으면 보안상 안좋으니까 .env.local에넣으면 된다!! 대신 앞부분에 VUE_APP라는 접두사가 꼭 포함되어야함
       // const SERVICE_KEY =
       //   "######################## Service Key ########################";
       const SERVICE_URL =
@@ -133,7 +135,7 @@ export default new Vuex.Store({
         .get(SERVICE_URL, { params })
         .then(({ data }) => {
           // console.log(commit, data);
-          commit("SET_HOUSE_LIST", data.response.body.items.item);
+          commit("SET_HOUSE_LIST", data.response.body.items.item); //우리는 state 직접 못해 그러니까 mutations한테 시키려고 commit
         })
         .catch((error) => {
           console.log(error);
@@ -142,7 +144,9 @@ export default new Vuex.Store({
     detailHouse({ commit }, house) {
       // 나중에 house.일련번호를 이용하여 API 호출
       // console.log(commit, house);
-      commit("SET_DETAIL_HOUSE", house);
+      //아파트 목록에서 아파트 클릭했을때, passprops으로 알려줫찌? 
+      //그래서 여기 house가 그냥 내가 클릭한 애 그자체임
+      commit("SET_DETAIL_HOUSE", house); //그래서 그냥 아파트 받아서 커밋날려
     },
     /////////////////////////////// House end /////////////////////////////////////
 
