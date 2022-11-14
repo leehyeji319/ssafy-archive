@@ -31,7 +31,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["sidos", "guguns", "houses"]),
+    ...mapState(["sidos", "guguns", "houses"]), //여기 siods가 바뀌면 위에 options와 연결되어있음
     // sidos() {
     //   return this.$store.state.sidos;
     // },
@@ -40,10 +40,13 @@ export default {
     // this.$store.dispatch("getSido");
     // this.sidoList();
     this.CLEAR_SIDO_LIST();
+    this.CLEAR_GUGUN_LIST();
     this.CLEAR_APT_LIST();
     this.getSido();
+    //비동기로 넘어와야하니까 actions, 카멜케이스니까 actions네? 근데 dispatch가 없고 그냥썻네? ...Actions를 쓰면되지
   },
   methods: {
+    //아 그냥 쓰고싶으면 ...mapActions 쓰면 되겟지!! $ 내부객체니까 안좋다고~
     ...mapActions(["getSido", "getGugun", "getHouseList"]),
     ...mapMutations(["CLEAR_SIDO_LIST", "CLEAR_GUGUN_LIST", "CLEAR_APT_LIST"]),
     // sidoList() {
@@ -51,9 +54,9 @@ export default {
     // },
     gugunList() {
       // console.log(this.sidoCode);
-      this.CLEAR_GUGUN_LIST();
+      this.CLEAR_GUGUN_LIST(); //기존에 있떤거는지워버려라
       this.gugunCode = null;
-      if (this.sidoCode) this.getGugun(this.sidoCode);
+      if (this.sidoCode) this.getGugun(this.sidoCode); //이 메서드는 mapActions에서 가져옴
     },
     searchApt() {
       if (this.gugunCode) this.getHouseList(this.gugunCode);

@@ -33,9 +33,9 @@ export default new Vuex.Store({
   },
   mutations: {
     /////////////////////////////// House start /////////////////////////////////////
-    SET_SIDO_LIST(state, sidos) {
-      sidos.forEach((sido) => {
-        state.sidos.push({ value: sido.sidoCode, text: sido.sidoName });
+    SET_SIDO_LIST(state, sidos) { //mutations는 첫번째에 꼭 state 받아야함!! 받아온 sidos
+      sidos.forEach((sido) => { //sido목록만큼 포문을 돌려서
+        state.sidos.push({ value: sido.sidoCode, text: sido.sidoName }); //객체로 만들어서 호출하겠다
       });
     },
     SET_GUGUN_LIST(state, guguns) {
@@ -91,12 +91,13 @@ export default new Vuex.Store({
   },
   actions: {
     /////////////////////////////// House start /////////////////////////////////////
-    getSido({ commit }) {
+    getSido({ commit }) { //actions를 호출할때는 context를 준다.
+      //어차피 그 안에서 mutations를 호출할거니까 그냥 commit만 호출하면 되니까 destructure 써서 commit만 꺼낸거임
       http
         .get(`/map/sido`)
         .then(({ data }) => {
           // console.log(data);
-          commit("SET_SIDO_LIST", data);
+          commit("SET_SIDO_LIST", data); //커밋하면 뮤테이션 호출하지 뮤테이션의 셋시도리스트를 데이터를 가지고 호출한다.
         })
         .catch((error) => {
           console.log(error);
@@ -165,6 +166,8 @@ export default new Vuex.Store({
     },
     //////////////////////////// Todo List end //////////////////////////////////
   },
+  //package.json에서 "vuex-persistedstate": "^4.1.0" 이거 사용하려면 아래 코드가 꼭! 있어야함 모듈에 넣어줘야함
+  //이거때문에 새로고침을 해도 날라가지 않느거다. 그럼 언제 날라가냐? 브라우저를 끄면 날라간다.
   modules: {},
   plugins: [
     createPersistedState({
