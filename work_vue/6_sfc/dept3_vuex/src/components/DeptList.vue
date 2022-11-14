@@ -14,7 +14,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-if="depts.length == 0">
+          <tr v-if="!depts || depts == null || depts.length == 0">
             <td colspan="4">등록된 사용자 정보가 없습니다.</td>
           </tr>
           <template v-else>
