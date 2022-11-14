@@ -15,7 +15,8 @@ export default {
     addCount: function () {
       this.count += 1;
       // this.$emit("addtotcount");
-      this.$store.state.count++;
+      //누르면 저장소에 있는걸 바꿔라
+      this.$store.state.count++; //뷰엑스에 데이터에 접근할때는 $store 사용한다. 그러면 store의 index.js 까지들어감
     },
   },
 };

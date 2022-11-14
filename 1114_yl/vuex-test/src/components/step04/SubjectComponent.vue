@@ -18,7 +18,8 @@ export default {
   methods: {
     addCount: function () {
       this.count += 1;
-      this.$store.commit("ADD_ONE");
+      this.$store.commit("ADD_ONE"); //소문자로하면 mutations의 add_one인지 actions의 add_one인지 알수 없음.
+      //그래서 mutations은ㅇ 대문자. actions는 카멜케이스
       // this.$store.state.count++;
     },
     addTenCount: function () {
