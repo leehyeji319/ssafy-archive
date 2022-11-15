@@ -46,6 +46,8 @@
 
 <script>
 import Constant from '@/common/Constant.js';
+//여기선 뮤테이션 쓸 일이없음
+import { mapGetters, mapActions } from "vuex";
 export default {
   //이제 이 데이터는 얘가 가지고있는게 아님.
   //store가 가지고 있는거임!!
@@ -54,21 +56,22 @@ export default {
   //     depts: [],
   //   };
   // },
-  computed: { //state를 바라보다가 변경되면 재계산되게끔 한다.
-    depts() {
-      return this.$store.state.depts;
-    }
-  },
-  props: {
-    refresh: {
-      type: Number,
-      default: 0,
-    },
+  // computed: { //state를 바라보다가 변경되면 재계산되게끔 한다.
+  //   depts() {
+  //     // return this.$store.state.depts;
+  //     return this.$store.getters.depts; 
+  //   }
+  // },
+  // 컴퓨티드와 getters 이름을 맞춘다.
+  // computed: mapGetters(["depts"]),
+  computed: {
+    ...mapGetters(["depts"]),
   },
   methods: {
-    getDepts() {
-      this.$store.dispatch(Constant.GET_DEPTS); //얘는 payload 넘길거 없으니까
-    },
+    ...mapActions([Constant.GET_DEPTS]),
+    // getDepts() {
+    //   // this.$store.dispatch(Constant.GET_DEPTS); //얘는 payload 넘길거 없으니까
+    // },
     pickDept(deptno) {
       this.$emit("select-dept", deptno);
       this.$router.push(`/dept/detail/${deptno}`)

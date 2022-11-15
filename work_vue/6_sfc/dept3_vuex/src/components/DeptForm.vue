@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import restApi from "@/util/http-common.js";
+import Constant from "@/common/Constant";
 export default {
   data() {
     return {
@@ -48,12 +48,23 @@ export default {
   },
   methods: {
     registerDept() {
+
+      this.$store.dispatch(Constant.REGISTER_DEPT, this.dept)
+        .then(() => { //dispatch가 promise를 준다.
+          console.log(`registerDept success`);
+          this.clear();
+          this.$router.push("/dept");
+        });
+
+        //vuex를 쓰게되면서 refresh를 하지 않아도 괜찮게 됏다
+        //why? 어차피 computed로 store에서 바뀌는 데이터를 받아올것이라서
+      /*
       restApi.post(`/api/depts`, this.dept).then(() => {
         console.log(`registerDept success`);
         this.$emit("change-data");
         this.clear();
         this.$router.push("/dept");
-      });
+       */
     },
     clear() {
       this.dept = {};
