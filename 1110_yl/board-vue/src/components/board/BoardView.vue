@@ -16,7 +16,7 @@
       <div class="view">{{ article.content }}</div>
 
       <div style="padding-top: 15px">
-        <router-link :to="{name: 'boardmodify', params: {articleno: article.articleno}}" class="btn">수정</router-link>
+        <router-link :to="{name: 'boardmodify', params: {articleno: article.articleno}}" class="btn">수정</router-link> 
         <router-link :to="{name: 'boarddelete', params: {articleno: article.articleno}}" class="btn">삭제</router-link>
         <router-link :to="{ name: 'boardlist' }" class="btn">목록</router-link>
         <a href="" class="btn">목록</a>
