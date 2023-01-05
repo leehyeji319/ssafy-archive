@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      let greeting = "hello ";
+      function hello(name) {
+        //얘의 식별자는 msg name
+        let msg = greeting + name; //어? 나한테 greeting없는데, 근데 내 상위 스콥인 전역에 잇네? 가져와!!
+
+        let inner = function () {
+          debugger;
+          console.log(greeting);
+          //얘의 상위는 hello
+          console.log(msg);
+        };
+        // inner();
+        return inner;
+      }
+      let func1 = hello("김재환"); //바깥에 Msg가 있으면 안불림 안에 잇으니까 불리는거야
+      //우리가 func1을 부르면 inner가 불림
+      func1();
+      //js는 자신이 감싸고 있는
+      //hello보다 이너가 더 오래 살아남는 경우가 있따.
+      //자신을 감싸고있는 상위에 접근하죠. 근데 그 객체를 유지를 해놓는다.
+      //실행 스택에서 호출순서를 관리해야하니까 쌓고 없어지고 이건 일어나지만,
+      //내가 파생시킨 중첩함수가 나를 참고하고있따? 그러면 내가 소멸돼도 나를 참조할 수 있어야하니까
+      //나의 참조객체를 살아두게 해서 접근할 수 있게한다 .........
+      //그러니까 따로 관리하는것임
+      //나를 정의한 상위스콥의 객체를 살려두는거져
+      //효진의 정리
+      //외부 함수보다 내부(중첩) 함수가 더 오래 살아있을 수 있기 때문에,
+      //외부 함수로의 "접근"은 못하지만, 내부 함수에서 내가 스스로 가지고 있던 객체들에 접근 가능함.
+      let func2 = hello("김태희");
+      func2();
+
+      //내부함수가 외부함수를 무조건 참조한다고 해서 클로저가 아니다
+      //리턴이나 그걸로 외부가 먼저 끝나도 내부쉑이 살아남을 경우 그런경우가 클로저다
+    </script>
+  </head>
+  <body></body>
+</html>

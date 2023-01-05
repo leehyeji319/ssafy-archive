@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>시계</title>
+    <script type="text/javascript">
+      window.onload = function () {
+        setInterval(showTime, 1000); //주기적으로 호출해주는게 setInterval 1초마다 호출
+        // 1000밀리세컨즈는 1초
+      };
+
+      // 얘는 콜백함수
+      function showTime() {
+        var view = document.getElementById("view"); //스팬을얻어옴
+        var date = new Date();
+        view.innerHTML = date.toLocaleTimeString();
+      }
+    </script>
+  </head>
+  <body>
+    현재 시간 : <span id="view"></span>
+  </body>
+</html>
+
+<!-- 스크립트 -> 브라우저에서 돌아가는언어 -->

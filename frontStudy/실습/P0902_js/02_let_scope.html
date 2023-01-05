@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      let myVar = "전역변수"; //윈도우 객체에 등록
+
+      function myFunc() {
+        let myVar = "지역변수";
+        global = "나는??"; //얘는 왜 접근이 가능할까? myVar처럼 전역이라서
+        //global처럼 선언하지 않고 사용하는 변수는 전역변수로 할당이 된다. -> 안좋음!!
+        const test = 1; //const변수를 선언하고, 여기에 함수를 선언
+        test = "a";
+        //let test = true; //중복 선언 오류!!
+        {
+          let count = 10;
+        } //정확하게 블록레벨 스코프가 유지가 된다.
+        // console.log(myVar, global, count, test); //오류
+        console.log(myVar, global, test);
+      }
+      function myFunc() {
+        aler("hi");
+      }
+      myFunc();
+      console.log(myVar, global);
+
+      //let, const: 정확하게 블록레벨 스코프를 쓸 수 있다.
+      //var: 전역변수 스코프 레벨 개념이 없다. 중복도 가능 -> 별로 안좋음!
+    </script>
+  </head>
+  <body></body>
+</html>

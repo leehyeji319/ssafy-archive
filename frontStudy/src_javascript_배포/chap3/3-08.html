@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Insert title here</title>
+    <script type="text/javascript">
+      // onload해서 읽혀진다 alert해서 해라~
+      window.onload = function () {
+        {
+          //let이라고 하면 이 블록안에서만 사용할수잇음 그래서 맨아래 console.log(val); 이 찾을수없음 오류가 남
+          // console.log(val); //얘는 에러는 안나고 undefind난다.
+          // var val = 10; //얘를 만나는순간 10을 집어넣고
+          let val = 20; //
+          console.log(val);
+          const con = 30;
+          // con = 20; ->상수니까~
+        }
+        {
+          //블록 스코프가 달라지는데도 계속 10이 찍히고잇네?
+          // var val = 50;
+          console.log(val); //여기서 10이 찍히겟지
+          //alert(con);
+        }
+        console.log(val);
+      };
+    </script>
+  </head>
+  <body></body>
+</html>

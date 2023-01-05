@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CSS - float 속성 이해하기</title>
+<style type="text/css">
+body {
+	font-size: 2em;
+}
+
+.wrap {
+	width: 1000px;
+	margin-bottom: 20px;
+	border:1px solid green;
+}
+
+.box200 {
+	width: 200px;
+	height: 200px;
+	background-color: blue;
+}
+
+.box300 {
+	width: 300px;
+	height: 200px;
+	background-color: lightgreen;
+}
+
+.box400 {
+	width: 400px;
+	height: 200px;
+	background-color: lightyellow;
+}
+
+.box500 {
+	width: 500px;
+	height: 200px;
+	background-color: lime;
+}
+
+.box800 {
+	width: 800px;
+	height: 200px;
+	background-color: lightblue;
+}
+
+.float_left {
+	float: left;
+}
+
+.float_right {
+	float: right;
+}
+
+.clear {
+	clear: both;
+}
+.overflow{
+	overflow:hidden;
+}
+.box {
+	width: 100px;
+	height: 100px;
+	margin: 10px;
+	background-color: lightgray;
+}
+</style>
+</head>
+<body>
+	<!-- <div class="wrap">
+		<div class="box200">200px</div>
+		<div class="box800">800px</div>
+	</div> -->
+
+  <!-- 얘는 계산해야하고 힘드니까 overflow hidden을주자고 -->
+  <!-- <div class="wrap" style="height: 200px;">
+		<div class="box200 float_left">200px</div>
+		<div class="box800 float_left">800px</div>
+	</div> -->
+
+  <!-- 부모가없다면 감싸진 부모를 만들어야함. 있으면 ㄱㅊ지 -->
+  <div class="wrap overflow" > 
+		<div class="box200 float_left">200px</div>
+		<div class="box800 float_left">800px</div>
+	</div>
+
+  <!-- 넘어간것은 짜르는게 아니라 다음행으로 내려간다 -->
+  <!-- right floating을 했기때문에 오른쪽에 다시 붙는거임 -->
+  <!-- <div class="wrap overflow">
+    <div class="box200 float_right">1</div>
+    <div class="box300 float_right">2</div>
+    <div class="box400 float_right">3</div>
+    <div class="box500 float_right">4</div>
+  </div> -->
+
+  <!-- wrap을 빼버림 플로팅이 해제되지않았을 때 뒤에있는 애가 영향받는것을 보자-->
+  <!-- 살짝 밀려서 뒤쪽부터 디스플레이된다 -->
+  <!-- 만약 hello world 입장에서 하고싶다-> clear left주면 된다 -->
+  <!-- 바로 위처럼 오버플로우를 씌워준다 -->
+  <div class="overflow">
+    <div class="box float_left">1</div>
+    <div style="background-color: pink; clear: left">Hello world</div>
+  </div>
+  <!-- 플로팅이 끝난거니까 헬로월드가 밑으로 내려갔다 -->
+  
+
+</body>
+</html>

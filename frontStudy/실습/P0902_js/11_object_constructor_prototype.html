@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      function Person(name, age) {
+        console.log(this);
+        this.name = name;
+        this.age = age;
+      }
+
+      Person.prototype.increaseAge = function () {
+        //person의 prototype에 increaseAge를 등록
+        //각각 가지고있는게 아니라 함께 쓰는 공통이 되는거임 (자바의 클래스처럼)
+        this.age++; //우리가 지금 호출하고있는 녀석을 this에 결합시켜주는거임
+      }; //얘가 객체에 직접 등록된 메서드가 아니지만,
+
+      let p1 = new Person("김재환", 27);
+      let p2 = new Person("아이유", 31);
+
+      console.log(p1.name, p1.age);
+      console.log(p2.name, p2.age);
+      p1.increaseAge();
+      p2.increaseAge();
+      p2.increaseAge();
+      console.log(p1.name, p1.age);
+      console.log(p2.name, p2.age);
+    </script>
+  </head>
+  <body></body>
+</html>

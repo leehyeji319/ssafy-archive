@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      //js에서 배열 만드는 법. (ArrayList같은 개념)
+      //배열 : 고정크기의 객체가 아닌 가변크기의 객체
+      //1. json 표기
+      //   let arr1 = []; //json표기
+      let arr1 = [100, 3, 20];
+      let arr2 = new Array(10);
+      let arr3 = new Array(10, 20, 30);
+
+      console.log(arr1);
+      console.log(arr2);
+      console.log(arr3);
+
+      arr2[0] = 100;
+      console.log(arr2);
+      arr3.push(40);
+      console.log(arr3);
+
+      //   arr1.sort(); //문자열 기준 정렬
+      //소트는 매개변수로 함수를 줄 수 있따
+      arr1.sort(function (left, right) {
+        return left - right;
+      });
+
+      for (const element of arr1) {
+        console.log(element);
+      }
+
+      arr1.forEach(function (element, index) {
+        console.log(element, index);
+      });
+
+      
+
+      arr1.forEach((element, idx) => console.log(element, idx))
+      
+
+      //배열 반복 돌리는 방법 직접 하나씩 뽑아도되고 고차함수로 전달해서 할수잇음
+    </script>
+  </head>
+  <body></body>
+</html>

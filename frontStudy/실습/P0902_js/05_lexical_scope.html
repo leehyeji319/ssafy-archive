@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      //var로 선언한 애들은 window에 등록한다햇잖아/
+      //let으로 선언하는 애들은 다른데에 선언된다.
+      //모든 함수는 자기자신안에 나를 파생시킨 나를 정의한 상위의 스콥에 해당하는 실행 컨텍스트를 가지고있다.
+      //여기서 outer, bar를 정의한 애는 전역레벨에서 정의했기 때문에
+      //뭐가 들어가있따? 전역실행 context를 가지고있따.
+      //함수가 실행 될 때 함수의 실행컨텍스트가 똑같이 생기고,,.들여다봤는데 변수가 없지.
+      //그럼 나의 상위의 스코프따라서 계속 뒤지는거임
+      //나한테 없는건 상위에서 찾는거임 그래서 1이 찍힌거임.
+      //outer를 부르면 또 outer함수만의 실행 컨텍스트가 생기고.. 등 등
+      let x = 1;
+      function outer() {
+        //변수에 대입하는 형식이 아니라 선언적을 만들어놨지?
+        let x = 10;
+        bar();
+      }
+
+      function bar() {
+        console.log("bar x :", x);
+      }
+
+      bar();
+      outer();
+      //모든 함수는 자신의 실행컨텍스트의 상위 스콥을 가지고잇따
+      //모든 함수는 자신이 정의될 때 자신을 정의한 상위 스콥 관련된 컨텍스트 객체를 가지고있다
+      //... 어쩌구 저쩌구 체이닝을 해서 찾아낸다.
+    </script>
+  </head>
+  <body></body>
+</html>
