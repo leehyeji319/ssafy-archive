@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let person = {
+      name: "김재환",
+      age: 27,
+      // increaseAge: () => {
+      increaseAge() {
+        console.log(this);
+        this.age++;
+      }
+    }
+    //객체의 메서드로 쓰일 함수는 나의 또다른 메서드를 부르거나 나의 프로퍼티에 접근하겟지?
+    //절대 에로우 펑션 쓰면 안된다. 
+    console.log(person.age); //얘는 this가 있음
+    person.increaseAge();
+    console.log(person.age)
+
+  </script>
+</body>
+
+</html>

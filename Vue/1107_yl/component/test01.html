@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vue.js</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app1">
+    <!-- 케밥으로 해야 나온다. -->
+    <my-global></my-global>
+    <my-global></my-global>
+  </div>
+  <div id="app2">
+    <my-global></my-global>
+    <my-global></my-global>
+  </div>
+  <script>
+    //new vue new vue 보다 위에 잇음 전역 컴포넌트임. 컴포넌트이름은 파스칼 혹은 케밥case
+    Vue.component("my-global", {
+      //화면에 뭐를 출력할지를 설정. html을 묶어서 표현할 수 있는 템플릿 사용
+      //template 여기는 하나의 루트만 잇어야함
+      template: "<div><h2>전역 컴포넌트입니다.</h2><h3>안녕하세요</h3></div>", //여기에 끼어넣을지 설정을 해야돼요 ~ 디브안에
+    });
+    // 전역 컴포넌트 설정
+    new Vue({
+      el: "#app1",
+    });
+    new Vue({
+      el: "#app2",
+    });
+  </script>
+</body>
+
+</html>
