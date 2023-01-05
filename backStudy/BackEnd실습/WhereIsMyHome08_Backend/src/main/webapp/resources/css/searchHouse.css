@@ -1,0 +1,26 @@
+h1 {
+  border-bottom: 3px solid black;
+}
+
+.apt-item {
+  border-bottom: 3px solid black;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.apt-item:hover {
+  background-color: yellow;
+}
+
+.apt-item-name {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.apt-item-value {
+  margin: 2px;
+}
+
+#search-bar {
+  background-color: gray;
+}
